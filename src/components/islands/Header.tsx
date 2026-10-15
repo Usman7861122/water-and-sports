@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { BOOK_URL, NAV, PHONE, PHONE_HREF, type NavItem } from '../../data/content';
 import { media } from '../../data/media';
 import { EASE } from '../../lib/animations';
+import MegaMenu from './MegaMenu';
 
 const Chevron = ({ open }: { open: boolean }) => (
   <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}>
@@ -16,6 +17,10 @@ export default function Header() {
   const [mobile, setMobile] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const show = (label: string) => { clearTimeout(timer.current); setOpen(label); };
+  const hide = () => { clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(null), 160); };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -27,7 +32,7 @@ export default function Header() {
   // Close menus on Escape or outside click; lock scroll for mobile drawer
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpen(null); setMobile(false); } };
-    const onClick = (e: MouseEvent) => { if (navRef.current && !navRef.current.contains(e.target as Node)) setOpen(null); };
+    const onClick = (e: MouseEvent) => { if (headerRef.current && !headerRef.current.contains(e.target as Node)) setOpen(null); };
     document.addEventListener('keydown', onKey);
     document.addEventListener('mousedown', onClick);
     return () => { document.removeEventListener('keydown', onKey); document.removeEventListener('mousedown', onClick); };
@@ -40,7 +45,21 @@ export default function Header() {
   const solid = scrolled || mobile || open !== null;
 
   return (
+    <>
+    <AnimatePresence>
+      {open && MEGA.includes(open) && (
+        <motion.div
+          key="scrim" aria-hidden="true"
+          className="fixed inset-0 z-40 hidden bg-ink/25 backdrop-blur-[2px] lg:block"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
+          onClick={() => setOpen(null)}
+        />
+      )}
+    </AnimatePresence>
     <header
+      ref={headerRef}
+      onMouseLeave={hide}
+      onMouseEnter={() => clearTimeout(timer.current)}
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
         solid ? 'bg-paper/92 shadow-[0_1px_0_rgb(10_27_51/0.08)] backdrop-blur-xl' : 'bg-transparent'
       }`}
@@ -61,7 +80,7 @@ export default function Header() {
           <ul className="flex items-center gap-1">
             {NAV.map((item) => (
               <DesktopItem key={item.label} item={item} solid={solid} open={open === item.label}
-                onOpen={() => setOpen(item.label)} onClose={() => setOpen(null)} onToggle={() => setOpen(open === item.label ? null : item.label)} />
+                onOpen={() => show(item.label)} onToggle={() => setOpen(open === item.label ? null : item.label)} />
             ))}
           </ul>
         </nav>
@@ -88,6 +107,13 @@ export default function Header() {
             <span className={`absolute left-0 h-[1.5px] w-6 bg-current transition-all duration-300 ${mobile ? 'top-[7px] -rotate-45' : 'top-[14px]'}`} />
           </span>
         </button>
+      </div>
+
+      {/* Desktop mega menu */}
+      <div className="hidden lg:block">
+        <AnimatePresence>
+          {open && MEGA.includes(open) && <MegaMenu key="mega" active={open} onNavigate={() => setOpen(null)} />}
+        </AnimatePresence>
       </div>
 
       {/* Mobile drawer */}
@@ -142,11 +168,14 @@ export default function Header() {
         )}
       </AnimatePresence>
     </header>
+    </>
   );
 }
 
-function DesktopItem({ item, solid, open, onOpen, onClose, onToggle }: {
-  item: NavItem; solid: boolean; open: boolean; onOpen: () => void; onClose: () => void; onToggle: () => void;
+const MEGA = ['Locations', 'Services', 'Resources'];
+
+function DesktopItem({ item, solid, open, onOpen, onToggle }: {
+  item: NavItem; solid: boolean; open: boolean; onOpen: () => void; onToggle: () => void;
 }) {
   const color = solid ? 'text-ink hover:text-brand' : 'text-white hover:text-gold-light';
   const base = `relative flex min-h-11 items-center gap-1.5 rounded-lg px-4 text-[0.95rem] font-medium tracking-wide transition-colors ${color}`;
@@ -154,41 +183,12 @@ function DesktopItem({ item, solid, open, onOpen, onClose, onToggle }: {
   if (!item.children) {
     return <li><a href={item.href} className={base}>{item.label}</a></li>;
   }
-  const wide = item.children.length > 8;
   return (
-    <li className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
-      <button type="button" className={base} aria-expanded={open} aria-haspopup="true" onClick={onToggle}>
+    <li onMouseEnter={onOpen}>
+      <button type="button" className={`${base} ${open ? 'after:scale-x-100' : 'after:scale-x-0'} after:absolute after:inset-x-4 after:bottom-1.5 after:h-px after:origin-left after:bg-current after:transition-transform after:duration-300`} aria-expanded={open} aria-haspopup="true" onClick={onToggle}>
         {item.label}
         <Chevron open={open} />
       </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className={`absolute left-1/2 top-full pt-3 ${wide ? 'w-[40rem]' : 'w-64'} -translate-x-1/2`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            transition={{ duration: 0.28, ease: EASE }}
-          >
-            <div className="rounded-2xl border border-ink/10 bg-paper p-3 shadow-[0_30px_60px_-20px_rgb(10_27_51/0.35)]">
-              {item.viewAll && (
-                <a href={item.viewAll.href} className="mb-1 flex min-h-11 items-center justify-between rounded-xl bg-sand px-4 text-sm font-semibold text-ink hover:bg-mist">
-                  {item.viewAll.label}<span aria-hidden="true">→</span>
-                </a>
-              )}
-              <ul className={wide ? 'grid grid-cols-2 gap-x-2' : ''}>
-                {item.children!.map((c) => (
-                  <li key={c.href}>
-                    <a href={c.href} className="flex min-h-11 items-center rounded-xl px-4 text-[0.95rem] text-text transition-colors hover:bg-mist hover:text-ink">
-                      {c.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </li>
   );
 }
