@@ -23,7 +23,11 @@ const Arrow = () => (
   <svg width="16" height="10" viewBox="0 0 18 12" aria-hidden="true" className="transition-transform duration-300 group-hover/cta:translate-x-1"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
 );
 
-const link = 'flex min-h-10 items-center rounded-lg px-3 text-[0.95rem] text-text transition-colors hover:bg-mist hover:text-ink focus-visible:bg-mist focus-visible:text-ink';
+const Dot = ({ top = 'mt-[0.62rem]' }: { top?: string }) => (
+  <span aria-hidden="true" className={`${top} h-1.5 w-1.5 shrink-0 rounded-full bg-sky transition-all duration-300 group-hover/item:scale-150 group-hover/item:bg-brand group-focus-visible/item:bg-brand`} />
+);
+
+const link = 'group/item flex min-h-10 items-center gap-3 rounded-lg px-3 text-[0.95rem] text-text transition-colors hover:bg-mist hover:text-ink focus-visible:bg-mist focus-visible:text-ink';
 
 function Services({ onNavigate }: { onNavigate: () => void }) {
   const bySlug = (s: string) => SERVICES_ALL.find((x) => x.href === `/${s}/`)!;
@@ -31,7 +35,7 @@ function Services({ onNavigate }: { onNavigate: () => void }) {
   const cur = SERVICES_ALL.find((x) => x.key === hover) ?? SERVICES_ALL[0];
   return (
     <div className="wrap grid grid-cols-12 gap-10 py-8">
-      <div className="col-span-8 grid grid-cols-3 gap-x-6">
+      <div className="col-span-9 grid grid-cols-3 gap-x-4">
         {SERVICE_GROUPS.map((g) => (
           <div key={g.title}>
             <p className="mb-3 px-3 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand">{g.title}</p>
@@ -40,7 +44,7 @@ function Services({ onNavigate }: { onNavigate: () => void }) {
                 const it = bySlug(s);
                 return (
                   <li key={s}>
-                    <a href={it.href} className={link} onClick={onNavigate} onMouseEnter={() => setHover(it.key)} onFocus={() => setHover(it.key)}>{it.title}</a>
+                    <a href={it.href} className={link} onClick={onNavigate} onMouseEnter={() => setHover(it.key)} onFocus={() => setHover(it.key)}><Dot top="" />{it.title}</a>
                   </li>
                 );
               })}
@@ -48,7 +52,7 @@ function Services({ onNavigate }: { onNavigate: () => void }) {
           </div>
         ))}
       </div>
-      <a href={cur.href} onClick={onNavigate} className="group/cta col-span-4 block overflow-hidden rounded-xl bg-mist">
+      <a href={cur.href} onClick={onNavigate} className="group/cta col-span-3 block overflow-hidden rounded-xl bg-mist">
         <div className="aspect-[16/10] overflow-hidden">
           <img key={cur.key} src={cur.image} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover/cta:scale-105 [animation:fadein_.5s_ease_both]" />
         </div>
@@ -76,9 +80,10 @@ function Locations({ onNavigate }: { onNavigate: () => void }) {
         <ul className="grid grid-cols-2 gap-x-6">
           {CLINICS.map((c) => (
             <li key={c.slug}>
-              <a href={`/locations/${c.slug}/`} onClick={onNavigate} onMouseEnter={() => setHover(c.slug)} onFocus={() => setHover(c.slug)} className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-mist focus-visible:bg-mist">
-                <span className="block font-medium text-ink">{c.name}</span>
-                <span className="block truncate text-sm text-muted">{c.address.split(',')[0]}</span>
+              <a href={`/locations/${c.slug}/`} onClick={onNavigate} onMouseEnter={() => setHover(c.slug)} onFocus={() => setHover(c.slug)} className="group/item flex gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-mist focus-visible:bg-mist">
+                <Dot top="mt-[0.6rem]" />
+                <span className="min-w-0"><span className="block font-medium text-ink">{c.name}</span>
+                <span className="block truncate text-sm text-muted">{c.address.split(',')[0]}</span></span>
               </a>
             </li>
           ))}
@@ -106,9 +111,10 @@ function Resources({ onNavigate }: { onNavigate: () => void }) {
       <ul className="col-span-8 grid grid-cols-2 gap-x-6">
         {RESOURCES.map((r) => (
           <li key={r.href}>
-            <a href={r.href} onClick={onNavigate} className="block rounded-lg px-3 py-3 transition-colors hover:bg-mist focus-visible:bg-mist">
-              <span className="block font-medium text-ink">{r.label}</span>
-              <span className="block text-sm text-muted">{r.text}</span>
+            <a href={r.href} onClick={onNavigate} className="group/item flex gap-3 rounded-lg px-3 py-3 transition-colors hover:bg-mist focus-visible:bg-mist">
+              <Dot top="mt-[0.6rem]" />
+              <span><span className="block font-medium text-ink">{r.label}</span>
+              <span className="block text-sm text-muted">{r.text}</span></span>
             </a>
           </li>
         ))}
