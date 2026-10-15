@@ -14,15 +14,20 @@ let ok = 0, fail = 0;
 for (const p of paths) {
   const out = join('public/media', p);
   if (existsSync(out)) { ok++; continue; }
-  try {
-    const res = await fetch(ORIGIN + encodeURI(p));
-    if (!res.ok) throw new Error(String(res.status));
-    mkdirSync(dirname(out), { recursive: true });
-    writeFileSync(out, Buffer.from(await res.arrayBuffer()));
-    ok++;
-  } catch (e) {
-    fail++;
-    console.warn('FAILED', p, String(e));
+  let done = false, lastErr = '';
+  for (let attempt = 1; attempt <= 4 && !done; attempt++) {
+    try {
+      const res = await fetch(ORIGIN + encodeURI(p), { signal: AbortSignal.timeout(60000) });
+      if (!res.ok) throw new Error(String(res.status));
+      mkdirSync(dirname(out), { recursive: true });
+      writeFileSync(out, Buffer.from(await res.arrayBuffer()));
+      done = true;
+    } catch (e) {
+      lastErr = String(e?.cause?.code ?? e);
+      await new Promise((r) => setTimeout(r, 1500 * attempt)); // the dev server is slow; wait and retry
+    }
   }
+  if (done) ok++;
+  else { fail++; console.warn('FAILED', p, lastErr); }
 }
 console.log(`Done: ${ok} saved, ${fail} failed, ${paths.size} total.`);
