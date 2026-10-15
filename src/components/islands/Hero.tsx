@@ -110,7 +110,7 @@ export default function Hero() {
 
   return (
     <>
-    <section ref={ref} onPointerMove={onMove} className="on-photo relative isolate flex min-h-[80svh] items-end overflow-hidden bg-ink text-white" aria-label="Welcome">
+    <section ref={ref} onPointerMove={onMove} className="on-photo relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink text-white" aria-label="Welcome">
       {/* Background slideshow with slow zoom */}
       <motion.div className="absolute inset-[-3%] -z-30" style={{ x: bgX, y: bgY }} aria-hidden="true">
         <AnimatePresence>

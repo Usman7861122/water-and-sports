@@ -149,7 +149,7 @@ function DesktopItem({ item, solid, open, onOpen, onClose, onToggle }: {
   item: NavItem; solid: boolean; open: boolean; onOpen: () => void; onClose: () => void; onToggle: () => void;
 }) {
   const color = solid ? 'text-ink hover:text-brand' : 'text-white hover:text-gold-light';
-  const base = `relative flex min-h-11 items-center gap-1.5 rounded-full px-4 text-[0.95rem] font-medium tracking-wide transition-colors ${color}`;
+  const base = `relative flex min-h-11 items-center gap-1.5 rounded-lg px-4 text-[0.95rem] font-medium tracking-wide transition-colors ${color}`;
 
   if (!item.children) {
     return <li><a href={item.href} className={base}>{item.label}</a></li>;
