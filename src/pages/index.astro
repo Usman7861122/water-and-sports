@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/islands/Hero';
+import About from '../components/sections/About.astro';
+import Services from '../components/islands/Services';
+import WhyUs from '../components/islands/WhyUs';
+import Locations from '../components/islands/Locations';
+import Technology from '../components/islands/Technology';
+import Athletes from '../components/islands/Athletes';
+import Blog from '../components/sections/Blog.astro';
+import Contact from '../components/sections/Contact.astro';
+---
+
+<BaseLayout>
+  <Hero client:load />
+  <About />
+  <Services client:visible />
+  <WhyUs client:visible />
+  <Locations client:visible />
+  <Technology client:visible />
+  <Athletes client:visible />
+  <Blog />
+  <Contact />
+</BaseLayout>
