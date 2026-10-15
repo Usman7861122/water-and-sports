@@ -5,7 +5,7 @@ import { media } from '../../data/media';
 import { EASE } from '../../lib/animations';
 
 const PHRASES = ['Get out of pain.', 'Avoid surgery when possible.', 'Get back to what you love.'];
-const ICONS: Record<string, JSX.Element> = {
+const ICONS: Record<string, ReactNode> = {
   pin: <><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></>,
   shield: <><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6l8-3z" /><path d="m8.5 12 2.5 2.5 4.5-5" /></>,
   cube: <><path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3z" /><path d="M4 7.5 12 12l8-4.5M12 12v9" /></>,
@@ -63,7 +63,7 @@ export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const [slide, setSlide] = useState(0);
   const [phrase, setPhrase] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const paused = false;
 
   // Pointer-driven depth: background, text layer and a soft light follow the cursor
   const nx = useMotionValue(0);

@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type SyntheticEvent } from 'react';
 
 type Values = { name: string; email: string; phone: string; message: string };
 type Errors = Partial<Record<keyof Values, string>>;
@@ -21,7 +21,7 @@ export default function ContactForm() {
     return e;
   }
 
-  function onSubmit(ev: FormEvent) {
+  function onSubmit(ev: SyntheticEvent) {
     ev.preventDefault();
     const e = validate();
     setErrors(e);
