@@ -219,6 +219,33 @@ export default function Hero() {
         </motion.div>
       </div>
 
+      {/* Slide controls (only when there is more than one slide) */}
+      {media.hero.length > 1 && (
+        <div className="absolute inset-x-0 bottom-5 z-10">
+          <div className="wrap flex items-center gap-1" role="group" aria-label="Hero slides">
+            {media.hero.map((h, i) => (
+              <button
+                key={h.src}
+                type="button"
+                onClick={() => setSlide(i)}
+                aria-label={`Show slide ${i + 1} of ${media.hero.length}`}
+                aria-current={i === slide}
+                className="group flex h-11 w-14 items-center"
+              >
+                <span className="relative block h-[3px] w-full overflow-hidden rounded-full bg-white/30 transition-colors group-hover:bg-white/50">
+                  {i === slide && (
+                    <span key={slide} className="absolute inset-y-0 left-0 block w-full origin-left bg-white [animation:slideprog_7s_linear_forwards] motion-reduce:[animation:none]" />
+                  )}
+                </span>
+              </button>
+            ))}
+            <span className="ml-3 text-[0.72rem] font-medium tracking-[0.2em] text-white/70" aria-hidden="true">
+              {String(slide + 1).padStart(2, '0')} / {String(media.hero.length).padStart(2, '0')}
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* Scroll cue */}
       <div className="pointer-events-none absolute bottom-10 right-8 hidden flex-col items-center gap-3 text-[0.7rem] uppercase tracking-[0.3em] text-white/70 lg:flex" aria-hidden="true">
         <span className="[writing-mode:vertical-rl]">Scroll</span>
