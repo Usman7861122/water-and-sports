@@ -67,7 +67,7 @@
   /* Buttons — 48px min height for comfortable tapping */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
-    min-height: 3rem; padding: 0 1.75rem; border-radius: 9999px;
+    min-height: 3rem; padding: 0 1.75rem; border-radius: .5rem;
     font-size: .9375rem; font-weight: 600; letter-spacing: .02em; white-space: nowrap; cursor: pointer;
     transition: transform .4s var(--ease-luxe), background-color .3s, color .3s, border-color .3s, box-shadow .3s;
   }

@@ -15,7 +15,7 @@ export const media = {
   hero: [
     { src: '/images/hero-1.webp', alt: 'A physical therapist guiding an athlete through a shoulder exercise in a bright modern clinic', pos: 'center 35%' },
     { src: '/images/hero-2.webp', alt: 'A swimmer training in a lap pool, seen from above', pos: 'center 20%' },
-    { src: '/images/hero-3.webp', alt: 'Golden sunrise over calm waves on an empty beach', pos: 'center 55%' },
+    { src: '/images/hero-3.webp', alt: 'An athlete stretching on a running track before training', pos: 'center 45%' },
   ],
 
   about: {
