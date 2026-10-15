@@ -11,12 +11,11 @@ const m = (path: string) => BASE + path;
 export const media = {
   logo: '/images/logo.webp',
 
-  // Hero slides. Slides 2 and 3 are clinic photos for now: swap in your licensed Shutterstock files
-  // (save them in public/images, e.g. hero-2.webp) and change the src below.
+  // Hero slides: licensed Shutterstock photos (standard license). Saved as hero-1..3.webp in public/images.
   hero: [
-    { src: '/images/Banner.webp', alt: 'Recovery lounge and treatment floor at a Water & Sports clinic', pos: 'center 60%' },
-    { src: '/images/wspt_5_30_14_14_23nczagqjs.webp', alt: 'Treatment floor at the Mission Beach clinic', pos: 'center 50%' },
-    { src: '/images/poway_2_ajxvu0473h.webp', alt: 'Treatment area at the Poway clinic', pos: 'center 50%' },
+    { src: '/images/hero-1.webp', alt: 'A physical therapist guiding an athlete through a shoulder exercise in a bright modern clinic', pos: 'center 35%' },
+    { src: '/images/hero-2.webp', alt: 'A swimmer training in a lap pool, seen from above', pos: 'center 20%' },
+    { src: '/images/hero-3.webp', alt: 'Golden sunrise over calm waves on an empty beach', pos: 'center 55%' },
   ],
 
   about: {
