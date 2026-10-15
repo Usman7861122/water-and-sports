@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
+    "media:download": "node scripts/download-media.mjs",
     "astro": "astro"
   },
   "dependencies": {

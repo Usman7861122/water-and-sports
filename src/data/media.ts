@@ -3,7 +3,9 @@
  * They currently load from the WordPress dev site. When the design is final,
  * download the ones you keep into /public/images and point these to local paths.
  */
-const BASE = import.meta.env.PUBLIC_MEDIA_BASE ?? 'http://54.236.221.108/wp-content/uploads/';
+// '/media/' is served by a rewrite to the dev server (see vercel.json / astro.config.mjs), so images load over https.
+// Run `npm run media:download` to save them into public/media — local files win over the rewrite automatically.
+const BASE = import.meta.env.PUBLIC_MEDIA_BASE ?? '/media/';
 const m = (path: string) => BASE + path;
 
 export const media = {
