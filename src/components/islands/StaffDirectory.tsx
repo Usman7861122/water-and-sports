@@ -41,7 +41,7 @@ export default function StaffDirectory({ members, groups }: { members: Member[];
 
       <p className="sr-only" aria-live="polite">Showing {shown.length} team members</p>
 
-      <motion.ul layout className="mt-12 grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
+      <motion.ul layout className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4 lg:gap-x-10">
         <AnimatePresence mode="popLayout" initial={false}>
           {shown.map((m) => (
             <motion.li
@@ -53,7 +53,7 @@ export default function StaffDirectory({ members, groups }: { members: Member[];
               transition={{ duration: 0.45, ease: EASE }}
             >
               <a href={`/${m.slug}/`} className="group block focus-visible:outline-none">
-                <div className="relative overflow-hidden rounded-2xl bg-mist shadow-[0_24px_50px_-34px_rgb(10_27_51/0.5)] ring-brand transition group-focus-visible:ring-2">
+                <div className="relative overflow-hidden rounded-[1.25rem] border border-ink/15 bg-white p-1.5 shadow-[0_24px_50px_-34px_rgb(10_27_51/0.5)] transition-colors duration-300 group-hover:border-sky group-focus-visible:border-brand"><div className="relative overflow-hidden rounded-xl bg-mist">
                   {m.image ? (
                     <img src={m.image} alt={`Portrait of ${m.name}`} loading="lazy" decoding="async" width="600" height="750" className="aspect-[4/5] w-full object-cover object-top transition duration-700 ease-out group-hover:scale-[1.04]" />
                   ) : (
@@ -61,6 +61,7 @@ export default function StaffDirectory({ members, groups }: { members: Member[];
                   )}
                   <div className="absolute inset-x-0 bottom-0 flex translate-y-full items-center justify-between bg-ink/85 px-4 py-3 text-sm font-semibold text-white transition-transform duration-500 ease-out group-hover:translate-y-0 group-focus-visible:translate-y-0">
                     View profile <span aria-hidden="true">→</span>
+                  </div>
                   </div>
                 </div>
                 <h3 className="mt-4 font-serif text-xl leading-snug text-ink">{m.name}</h3>
