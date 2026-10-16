@@ -65,7 +65,7 @@ export default function StaffDirectory({ members, groups }: { members: Member[];
                   </div>
                 </div>
                 <h3 className="mt-4 font-serif text-xl leading-snug text-ink">{m.name}</h3>
-                <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand">{m.creds}</p>
+                <p className="creds mt-2.5 !gap-1.5">{m.creds.split(', ').map((c) => <span key={c} className="cred cred-sm">{c}</span>)}</p>
                 <p className="mt-1 text-sm text-muted">{m.role}</p>
               </a>
             </motion.li>

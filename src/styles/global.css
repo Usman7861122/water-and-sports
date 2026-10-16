@@ -122,3 +122,16 @@
 .team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.25rem; row-gap: 2.5rem; }
 @media (min-width: 768px) { .team-grid { column-gap: 2rem; row-gap: 3rem; } .team-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 1024px) { .team-grid { column-gap: 2.5rem; } .team-grid.cols-4, .team-grid.cols-3 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* Credential chips (PT, DPT, OCS …) */
+.creds { display: flex; flex-wrap: wrap; gap: .5rem; }
+.cred {
+  display: inline-flex; align-items: center; min-height: 1.9rem; padding: 0 .8rem; border-radius: .4rem;
+  border: 1px solid color-mix(in srgb, var(--color-brand) 55%, transparent);
+  background: rgb(255 255 255 / .75); color: var(--color-brand);
+  font-family: var(--font-sans, inherit); font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; line-height: 1;
+  box-shadow: 0 1px 0 rgb(255 255 255 / .9) inset, 0 6px 14px -10px rgb(10 27 51 / .45);
+  transition: background-color .3s, border-color .3s, color .3s, transform .3s var(--ease-luxe);
+}
+.cred:hover { background: var(--color-brand); border-color: var(--color-brand); color: #fff; transform: translateY(-2px); }
+.cred-sm { min-height: 1.5rem; padding: 0 .55rem; font-size: .66rem; letter-spacing: .1em; }
