@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Reveal from '../components/islands/Reveal';
+import CtaBand from '../components/sections/CtaBand.astro';
 import { BOOK_URL, CLINICS, PHONE, PHONE_HREF } from '../data/content';
 import { GOLDFARB as g } from '../data/staff';
 ---
@@ -185,15 +186,5 @@ import { GOLDFARB as g } from '../data/staff';
   </section>
 
   <!-- CTA -->
-  <section class="on-blue relative isolate overflow-hidden bg-sky py-16 text-ink lg:py-24" aria-label="Book an appointment">
-    <div class="wrap grid items-center gap-8 lg:grid-cols-12">
-      <div class="lg:col-span-8">
-        <Reveal client:visible><h2 class="h-section">Recover, train and perform with <em>Dr. Goldfarb’s team.</em></h2></Reveal>
-      </div>
-      <Reveal client:visible delay={0.1} className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
-        <a href={BOOK_URL} class="btn btn-gold">Request Appointment</a>
-        <a href="/staff/" class="btn btn-outline">Meet the full team</a>
-      </Reveal>
-    </div>
-  </section>
+  <CtaBand>Recover, train and perform with <em>Dr. Goldfarb’s team.</em></CtaBand>
 </BaseLayout>
