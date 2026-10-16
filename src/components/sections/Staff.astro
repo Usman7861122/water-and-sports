@@ -21,7 +21,7 @@ import { STAFF_FEATURED } from '../../data/content';
       {STAFF_FEATURED.map((m, i) => (
         <li>
           <Reveal client:visible delay={(i % 3) * 0.08}>
-            <a href="/staff/" class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand" aria-label={`${m.name}, ${m.role}. See our full team.`}>
+            <a href={m.href} class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand" aria-label={`${m.name}, ${m.role}. ${m.href === '/staff/' ? 'See our full team.' : 'View profile.'}`}>
               <div class="relative overflow-hidden rounded-2xl bg-sand shadow-[0_24px_50px_-30px_rgb(10_27_51/0.45)]">
                 <img
                   src={m.image}
@@ -30,7 +30,7 @@ import { STAFF_FEATURED } from '../../data/content';
                   class="aspect-[4/5] w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
                 <span class="absolute inset-x-0 bottom-0 flex translate-y-full items-center justify-between bg-gradient-to-t from-ink/80 to-transparent px-5 pb-4 pt-10 text-sm font-semibold text-white transition-transform duration-500 ease-out group-hover:translate-y-0 group-focus-visible:translate-y-0 motion-reduce:transition-none" aria-hidden="true">
-                  Meet the team
+                  {m.href === '/staff/' ? 'Meet the team' : 'View profile'}
                   <svg width="18" height="12" viewBox="0 0 18 12"><path d="M1 6h15M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
               </div>

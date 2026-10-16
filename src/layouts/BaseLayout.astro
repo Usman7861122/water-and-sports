@@ -4,8 +4,8 @@ import Footer from '../components/sections/Footer.astro';
 import Header from '../components/islands/Header';
 import { SITE } from '../data/content';
 
-interface Props { title?: string; description?: string; }
-const { title = SITE.title, description = SITE.description } = Astro.props;
+interface Props { title?: string; description?: string; solidHeader?: boolean; }
+const { title = SITE.title, description = SITE.description, solidHeader = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,7 +26,7 @@ const { title = SITE.title, description = SITE.description } = Astro.props;
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-gold-light focus:px-5 focus:py-3 focus:font-semibold focus:text-ink">Skip to content</a>
-    <Header client:load />
+    <Header client:load alwaysSolid={solidHeader} />
     <main id="main">
       <slot />
     </main>

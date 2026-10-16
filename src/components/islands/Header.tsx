@@ -11,7 +11,7 @@ const Chevron = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-export default function Header() {
+export default function Header({ alwaysSolid = false }: { alwaysSolid?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState<string | null>(null); // desktop dropdown
   const [mobile, setMobile] = useState(false);
@@ -42,7 +42,7 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [mobile]);
 
-  const solid = scrolled || mobile || open !== null;
+  const solid = alwaysSolid || scrolled || mobile || open !== null;
 
   return (
     <>
