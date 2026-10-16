@@ -21,6 +21,7 @@ const specialists = extra
   ? extra.specialists.map((s) => ALL_STAFF.find((m) => m.slug === s)).filter((m): m is NonNullable<typeof m> => Boolean(m))
   : ALL_STAFF.filter((m) => m.clinics.includes(clinic.slug));
 const faqs = extra?.faqs ?? [];
+const tagline = extra?.tagline ?? clinic.tagline;
 const area = CLINIC_AREAS[clinic.slug];
 const areaText = area ? `${area.places.slice(0, -1).join(', ')} and ${area.places[area.places.length - 1]}` : '';
 const phone = `(858) 488-3597 ext. ${clinic.ext}`;
@@ -28,14 +29,13 @@ const phoneHref = `${PHONE_HREF},${clinic.ext}`;
 const query = encodeURIComponent(`Water & Sports Physical Therapy ${clinic.address}`);
 const mapSrc = `https://maps.google.com/maps?q=${query}&output=embed`;
 const directions = `https://www.google.com/maps/search/?api=1&query=${query}`;
-const directorName = clinic.director?.replace(/, PT, DPT.*$/, '').replace(/ PT, DPT.*$/, '');
 const initials = (n: string) => n.replace(/^Dr\.\s*/, '').replace(/[“”"]/g, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('');
 ---
 
 <BaseLayout
   solidHeader
   title={`${clinic.name} Physical Therapy | Water & Sports Physical Therapy San Diego`}
-  description={`${clinic.tagline} ${clinic.address}. Call ${phone}.`}
+  description={`${tagline} ${clinic.address}. Call ${phone}.`}
 >
   <!-- Hero -->
   <section class="relative isolate overflow-hidden bg-mist/60 pb-16 pt-32 lg:pb-24 lg:pt-44">
@@ -48,7 +48,7 @@ const initials = (n: string) => n.replace(/^Dr\.\s*/, '').replace(/[“”"]/g, 
         <Reveal client:load><a href="/#locations" class="link-arrow text-sm"><span aria-hidden="true">←</span> All Locations</a></Reveal>
         <Reveal client:load delay={0.06}><p class="eyebrow mt-8">Physical therapy in {clinic.name}</p></Reveal>
         <Reveal client:load delay={0.12}><h1 class="h-display mt-5">{clinic.name} <em>Clinic</em></h1></Reveal>
-        <Reveal client:load delay={0.2}><p class="lead mt-6 max-w-xl">{clinic.tagline}</p></Reveal>
+        <Reveal client:load delay={0.2}><p class="lead mt-6 max-w-xl">{tagline}</p></Reveal>
         <Reveal client:load delay={0.26}>
           <ul role="list" class="mt-8 grid gap-3 text-[0.98rem] text-ink">
             <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>{clinic.address}{clinic.note && <span class="text-muted"> · {clinic.note}</span>}</span></li>

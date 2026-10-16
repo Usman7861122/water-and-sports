@@ -30,7 +30,7 @@ export default function ClinicGallery({ images, name }: Props) {
   const feature = images.length === 5; // 1 big + 4 small tiles fill the grid exactly
   return (
     <>
-      <ul role="list" className={`grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 ${feature ? "md:auto-rows-[15rem] md:grid-cols-4 lg:auto-rows-[18rem]" : "md:grid-cols-3"}`}>
+      <ul role="list" className={`grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 ${feature ? "md:auto-rows-[15rem] md:grid-cols-4 lg:auto-rows-[18rem]" : images.length === 4 ? "md:grid-cols-4" : "md:grid-cols-3"}`}>
         {images.map((src, i) => (
           <li key={src} className={feature && i === 0 ? 'col-span-2 row-span-2' : ''}>
             <button

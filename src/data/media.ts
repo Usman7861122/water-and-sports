@@ -72,13 +72,13 @@ export const media = {
   /** Clinic photos (first few from each clinic page on the dev site). */
   gallery: {
     'carmel-valley': [m('2026/06/carmel_valley11_15_7_cur2423gn9.webp'), m('2026/06/Carmel-Valley-image2.jpg'), m('2026/06/carmel_valley11_15_12_1mwuz0yl31.jpg'), m('2026/06/carmel_valley11_15_13_lqsn5chd5a.jpg'), m('2026/06/carmel_valley_pool_5_28_19_64_3j1x1floqe.jpg')],
-    coronado: [m('2026/06/coronado_clinic_1_zbw6v0k6ew.webp'), m('2026/06/coronado_clinic_2_0cu1t6b86m.webp'), m('2026/06/coronado_clinic_3_nwu0yqa25t.webp')],
-    downtown: [m('2026/06/downtown_clinic_1_236usav22q.webp'), m('2026/06/downtown_clinic_5_20xfdr9ycr.webp'), m('2026/06/downtown_clinic_8_cgwodiotf0.webp')],
+    coronado: [m('2026/06/coronado_clinic_1_zbw6v0k6ew.webp'), m('2026/06/coronado_clinic_2_0cu1t6b86m.webp'), m('2026/06/coronado_clinic_3_nwu0yqa25t.webp'), m('2026/06/coronado_clinic_4_hpin92b7c7.webp'), m('2026/06/chase_meidroth_41_v6qcn5uw3x.webp')],
+    downtown: [m('2026/06/downtown_clinic_1_236usav22q.webp'), m('2026/06/downtown_clinic_5_20xfdr9ycr.webp'), m('2026/06/downtown_clinic_8_cgwodiotf0.webp'), m('2026/06/downtown_pool_8_19_674_vtiet71rkt-scaled.webp'), m('2026/06/downtown_pool_8_19_17_oki4p81vfy.webp')],
     'pacific-beach': [m('2026/09/unnamed-1-scaled.jpg'), m('2026/09/unnamed.jpg'), m('2026/09/unnamed-2.jpg')],
-    'mission-beach': [m('2026/06/wspt_5_30_14_1_ov1zdc97l5.webp'), m('2026/06/wspt_5_30_14_3_g853966hie.webp'), m('2026/06/wspt_5_30_14_5_2fiptmk8p9.webp')],
-    poway: [m('2026/06/poway_clinic_1_m8fegua0f3.webp'), m('2026/06/poway_clinic_2_jh0iqivv6a.webp'), m('2026/06/poway_clinic_3_0qtfvbo9zt.webp')],
-    'scripps-ranch': [m('2026/06/sr_clinic_17_fxfckjxxdl.webp'), m('2026/06/sr_clinic_14_k8od5aw11x.webp'), m('2026/06/sr_clinic_15_m4e1y3xk43.webp')],
-    utc: [m('2026/06/utc_aug_20_7_dhqwoeicfe.webp'), m('2026/06/utc_aug_20_6_tqugey0sxi.webp'), m('2026/06/utc_aug_20_14_v3l1kwhhzd.webp')],
+    'mission-beach': [m('2026/06/wspt_5_30_14_1_ov1zdc97l5.webp'), m('2026/06/wspt_5_30_14_3_g853966hie.webp'), m('2026/06/wspt_5_30_14_5_2fiptmk8p9.webp'), m('2026/06/wspt_5_30_14_4_brqzp0xmt9.webp')],
+    poway: [m('2026/06/poway_clinic_1_m8fegua0f3.webp'), m('2026/06/poway_clinic_2_jh0iqivv6a.webp'), m('2026/06/poway_clinic_3_0qtfvbo9zt.webp'), m('2026/06/poway_clinic_4_mwoy8dyhrn.webp'), m('2026/06/poway_clinic_5_ra5d3rch4y.webp')],
+    'scripps-ranch': [m('2026/06/sr_clinic_17_fxfckjxxdl.webp'), m('2026/06/sr_clinic_14_k8od5aw11x.webp'), m('2026/06/sr_clinic_15_m4e1y3xk43.webp'), m('2026/06/sr_clinic_16_rcy7lbhsa2.webp'), m('2026/06/sr_clinic_4_ojh6c6awsx.webp')],
+    utc: [m('2026/06/utc_aug_20_7_dhqwoeicfe.webp'), m('2026/06/utc_aug_20_6_tqugey0sxi.webp'), m('2026/06/utc_aug_20_14_v3l1kwhhzd.webp'), m('2026/06/utc_aug_20_15_8g0vzfd6c3.webp'), m('2026/06/utc_aug_20_18_bf4yovzi31.webp')],
   } as Record<string, string[]>,
 
 
