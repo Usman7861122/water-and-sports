@@ -15,22 +15,20 @@ const stats = [
     <!-- Image collage -->
     <div class="lg:col-span-6">
       <Reveal client:visible>
-        <div class="relative pb-14 pr-8 sm:pr-14">
-          <div class="absolute -left-4 -top-4 hidden h-full w-full rounded-[2rem] border border-gold/50 sm:block" aria-hidden="true"></div>
-          <div class="relative overflow-hidden rounded-[2rem] bg-sand">
-            <img
-              src={media.about.main}
-              alt="Bright treatment floor with recovery lounge at a Water & Sports clinic"
-              width="1600" height="1005" loading="lazy" decoding="async"
-              class="aspect-[4/5] w-full object-cover object-[80%_60%]"
-            />
+        <div class="mx-auto max-w-[32rem] pb-5 pr-5 lg:mx-0">
+          <div class="relative">
+          <div class="absolute inset-0 translate-x-5 translate-y-5 rounded-[2rem] border border-sky" aria-hidden="true"></div>
+          <div class="relative overflow-hidden rounded-[2rem] bg-ink shadow-[0_40px_80px_-40px_rgb(10_27_51/0.55)]">
+            <video
+              data-about-video
+              class="block aspect-[3/4] w-full object-cover"
+              src="/videos/water-and-sports-about.mp4"
+              poster="/images/about-video-poster.jpg"
+              width="1080" height="1440"
+              autoplay muted loop playsinline preload="metadata"
+              aria-label="Water & Sports Physical Therapy: we measure, we treat, you are back."
+            ></video>
           </div>
-          <div class="absolute bottom-0 right-0 w-[52%] overflow-hidden rounded-[1.5rem] border-[6px] border-paper bg-sand shadow-[0_30px_60px_-25px_rgb(10_27_51/0.5)]">
-            <img src={media.about.second} alt="Indoor turf training area" width="600" height="600" loading="lazy" decoding="async" class="aspect-square w-full object-cover" />
-          </div>
-          <div class="absolute left-3 top-8 hidden max-w-[11rem] rounded-2xl border border-ink/10 bg-white px-5 py-4 text-ink shadow-xl sm:block">
-            <p class="font-serif text-lg leading-tight text-brand">Official Physical Therapist</p>
-            <p class="mt-1 text-sm text-muted">San Diego Padres</p>
           </div>
         </div>
       </Reveal>
@@ -74,3 +72,15 @@ const stats = [
     </div>
   </div>
 </section>
+
+<script>
+  // Play only while visible; respect reduced-motion (show the poster with controls instead).
+  const v = document.querySelector<HTMLVideoElement>('[data-about-video]');
+  if (v) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.removeAttribute('autoplay'); v.pause(); v.controls = true;
+    } else {
+      new IntersectionObserver(([e]) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }, { threshold: 0.25 }).observe(v);
+    }
+  }
+</script>
