@@ -1,6 +1,6 @@
 // Downloads every image used by src/data/media.ts + the athlete photos from the dev site into public/media/.
 // Run on a machine that can reach the dev server:  npm run media:download
-import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, mkdirSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
 const ORIGIN = 'http://54.236.221.108/wp-content/uploads/';
@@ -13,7 +13,7 @@ for (const x of content.matchAll(/file:\s*'([^']+)'/g)) paths.add('2026/07/' + x
 let ok = 0, fail = 0;
 for (const p of paths) {
   const out = join('public/media', p);
-  if (existsSync(out)) { ok++; continue; }
+  if (existsSync(out) && statSync(out).size > 1000) { ok++; continue; } // tiny files are failed downloads (403 pages)
   let done = false, lastErr = '';
   for (let attempt = 1; attempt <= 4 && !done; attempt++) {
     try {

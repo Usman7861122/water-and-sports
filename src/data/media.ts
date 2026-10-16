@@ -97,4 +97,14 @@ export const media = {
   },
 
   athlete: (file: string) => m('2026/07/' + file),
+
+  // Staff headshots (homepage Our Staff section)
+  staff: {
+    goldfarb: m('2026/06/drcy2vir8p2t_isgwu3dh5r.BPTDPTOCSOMTCSCS-e1781983239766.webp'),
+    regala: m('2026/07/drkftbbzepj5_5oj5cgmwx9.2CJ22REGALAPTDPT.webp'),
+    evans: m('2026/07/drpkh7zqxwq6_547bd7tyqc.VIDEVANSPTDPTOCS.webp'),
+    li: m('2026/07/dr_garrick_li_pt_dpt_cert_27icd568wt.VRS_.webp'),
+    horner: m('2026/07/drxflhs8f1tm_efkea4via0.ADDIEHORNERPTDPT.webp'),
+    friedman: m('2026/07/drljud335ajd_s4esyst7ur.ATTFRIEDMANPTDPT.webp'),
+  },
 };
