@@ -117,3 +117,8 @@
   animation: ring 3s linear infinite;
 }
 .btn[href*="request-an-appointment"]:hover::after { animation-duration: 1.4s; }
+
+/* Team grids: explicit gaps so cards never touch */
+.team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.25rem; row-gap: 2.5rem; }
+@media (min-width: 768px) { .team-grid { column-gap: 2rem; row-gap: 3rem; } .team-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .team-grid { column-gap: 2.5rem; } .team-grid.cols-4, .team-grid.cols-3 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }

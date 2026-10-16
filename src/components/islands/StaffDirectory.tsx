@@ -41,7 +41,7 @@ export default function StaffDirectory({ members, groups }: { members: Member[];
 
       <p className="sr-only" aria-live="polite">Showing {shown.length} team members</p>
 
-      <motion.ul layout className="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4 lg:gap-x-10">
+      <motion.ul layout className="team-grid cols-3 mt-12">
         <AnimatePresence mode="popLayout" initial={false}>
           {shown.map((m) => (
             <motion.li

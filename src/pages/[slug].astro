@@ -104,7 +104,7 @@ const bio = member.bio.length
         <h2 id="more-title" class="h-section">Meet more of <em>the team.</em></h2>
         <a href="/staff/" class="link-arrow">See everyone <span aria-hidden="true">→</span></a>
       </div>
-      <ul role="list" class="mt-10 grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-4">
+      <ul role="list" class="team-grid cols-4 mt-10">
         {related.map((t) => (
           <li>
             <a href={`/${t.slug}/`} class="group block">
