@@ -4,7 +4,7 @@ import Reveal from '../../components/islands/Reveal';
 import ClinicGallery from '../../components/islands/ClinicGallery';
 import CtaBand from '../../components/sections/CtaBand.astro';
 import { BOOK_URL, CLINICS, FAX, PHONE_HREF, SERVICES_ALL } from '../../data/content';
-import { CLINIC_EXTRA } from '../../data/clinicPages';
+import { CLINIC_AREAS, CLINIC_EXTRA } from '../../data/clinicPages';
 import { ALL_STAFF } from '../../data/team';
 import type { Clinic } from '../../data/content';
 
@@ -21,6 +21,8 @@ const specialists = extra
   ? extra.specialists.map((s) => ALL_STAFF.find((m) => m.slug === s)).filter((m): m is NonNullable<typeof m> => Boolean(m))
   : ALL_STAFF.filter((m) => m.clinics.includes(clinic.slug));
 const faqs = extra?.faqs ?? [];
+const area = CLINIC_AREAS[clinic.slug];
+const areaText = area ? `${area.places.slice(0, -1).join(', ')} and ${area.places[area.places.length - 1]}` : '';
 const phone = `(858) 488-3597 ext. ${clinic.ext}`;
 const phoneHref = `${PHONE_HREF},${clinic.ext}`;
 const query = encodeURIComponent(`Water & Sports Physical Therapy ${clinic.address}`);
@@ -52,6 +54,12 @@ const initials = (n: string) => n.replace(/^Dr\.\s*/, '').replace(/[“”"]/g, 
             <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>{clinic.address}{clinic.note && <span class="text-muted"> · {clinic.note}</span>}</span></li>
             <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>{clinic.hours[0]}</span></li>
           </ul>
+          {area && (
+            <p class="mt-6 flex max-w-xl items-start gap-3 border-t border-ink/10 pt-6 text-[0.98rem] leading-7 text-muted">
+              <svg viewBox="0 0 24 24" class="mt-1 h-5 w-5 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span>Patients are welcome from across {areaText} and the {area.region}.</span>
+            </p>
+          )}
         </Reveal>
         <Reveal client:load delay={0.32}>
           <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">

@@ -24,3 +24,15 @@ export const CLINIC_EXTRA: Record<string, ClinicExtra> = {
     ],
   },
 };
+
+/** Nearby neighborhoods and cities each clinic serves (shown in the page header for local SEO). Edit freely. */
+export const CLINIC_AREAS: Record<string, { places: string[]; region: string }> = {
+  'carmel-valley': { places: ['Carmel Valley', 'Del Mar', 'Solana Beach', 'Torrey Pines', 'Torrey Hills', 'Pacific Highlands Ranch'], region: 'North County Coastal area' },
+  coronado: { places: ['Coronado', 'Imperial Beach', 'Point Loma', 'Downtown San Diego', 'National City'], region: 'South Bay area' },
+  downtown: { places: ['the Gaslamp Quarter', 'East Village', 'Little Italy', 'Bankers Hill', 'Hillcrest', 'Barrio Logan'], region: 'greater Downtown San Diego area' },
+  'pacific-beach': { places: ['Pacific Beach', 'Mission Beach', 'La Jolla', 'Crown Point', 'Bay Park', 'Clairemont'], region: 'greater Mission Bay area' },
+  'mission-beach': { places: ['Mission Beach', 'Pacific Beach', 'Ocean Beach', 'Point Loma', 'Bay Park', 'Clairemont'], region: 'greater Mission Bay area' },
+  poway: { places: ['Poway', 'Rancho Bernardo', 'Rancho Peñasquitos', 'Scripps Ranch', 'Escondido', 'Ramona'], region: 'North San Diego County area' },
+  'scripps-ranch': { places: ['Scripps Ranch', 'Mira Mesa', 'Rancho Peñasquitos', 'Sabre Springs', 'Tierrasanta', 'Rancho Bernardo'], region: 'North San Diego area' },
+  utc: { places: ['La Jolla', 'University City', 'the Golden Triangle', 'Clairemont', 'Mira Mesa', 'Torrey Pines'], region: 'greater San Diego area' },
+};
