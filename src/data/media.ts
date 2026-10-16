@@ -71,7 +71,7 @@ export const media = {
 
   /** Clinic photos (first few from each clinic page on the dev site). */
   gallery: {
-    'carmel-valley': [m('2026/06/carmel_valley11_15_7_cur2423gn9.webp'), m('2026/06/Carmel-Valley-image2.jpg'), m('2026/06/carmel_valley11_15_12_1mwuz0yl31.jpg')],
+    'carmel-valley': [m('2026/06/carmel_valley11_15_7_cur2423gn9.webp'), m('2026/06/Carmel-Valley-image2.jpg'), m('2026/06/carmel_valley11_15_12_1mwuz0yl31.jpg'), m('2026/06/carmel_valley11_15_13_lqsn5chd5a.jpg'), m('2026/06/carmel_valley_pool_5_28_19_64_3j1x1floqe.jpg')],
     coronado: [m('2026/06/coronado_clinic_1_zbw6v0k6ew.webp'), m('2026/06/coronado_clinic_2_0cu1t6b86m.webp'), m('2026/06/coronado_clinic_3_nwu0yqa25t.webp')],
     downtown: [m('2026/06/downtown_clinic_1_236usav22q.webp'), m('2026/06/downtown_clinic_5_20xfdr9ycr.webp'), m('2026/06/downtown_clinic_8_cgwodiotf0.webp')],
     'pacific-beach': [m('2026/09/unnamed-1-scaled.jpg'), m('2026/09/unnamed.jpg'), m('2026/09/unnamed-2.jpg')],

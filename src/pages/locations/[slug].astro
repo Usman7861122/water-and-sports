@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Reveal from '../../components/islands/Reveal';
+import ClinicGallery from '../../components/islands/ClinicGallery';
+import CtaBand from '../../components/sections/CtaBand.astro';
+import { BOOK_URL, CLINICS, FAX, PHONE_HREF, SERVICES_ALL } from '../../data/content';
+import { CLINIC_EXTRA } from '../../data/clinicPages';
+import { ALL_STAFF } from '../../data/team';
+import type { Clinic } from '../../data/content';
+
+export function getStaticPaths() {
+  return CLINICS.map((clinic) => ({ params: { slug: clinic.slug }, props: { clinic } }));
+}
+
+const { clinic } = Astro.props as { clinic: Clinic };
+const extra = CLINIC_EXTRA[clinic.slug];
+const about = extra?.about ?? [clinic.blurb];
+const gallery = clinic.gallery;
+const conditions = (extra?.conditions ?? SERVICES_ALL.map((s) => s.title)).map((title) => ({ title, href: SERVICES_ALL.find((s) => s.title === title)?.href }));
+const specialists = extra
+  ? extra.specialists.map((s) => ALL_STAFF.find((m) => m.slug === s)).filter((m): m is NonNullable<typeof m> => Boolean(m))
+  : ALL_STAFF.filter((m) => m.clinics.includes(clinic.slug));
+const faqs = extra?.faqs ?? [];
+const phone = `(858) 488-3597 ext. ${clinic.ext}`;
+const phoneHref = `${PHONE_HREF},${clinic.ext}`;
+const query = encodeURIComponent(`Water & Sports Physical Therapy ${clinic.address}`);
+const mapSrc = `https://maps.google.com/maps?q=${query}&output=embed`;
+const directions = `https://www.google.com/maps/search/?api=1&query=${query}`;
+const directorName = clinic.director?.replace(/, PT, DPT.*$/, '').replace(/ PT, DPT.*$/, '');
+const initials = (n: string) => n.replace(/^Dr\.\s*/, '').replace(/[“”"]/g, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('');
+---
+
+<BaseLayout
+  solidHeader
+  title={`${clinic.name} Physical Therapy | Water & Sports Physical Therapy San Diego`}
+  description={`${clinic.tagline} ${clinic.address}. Call ${phone}.`}
+>
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden bg-mist/60 pb-16 pt-32 lg:pb-24 lg:pt-44">
+    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      <div class="absolute -right-40 top-10 h-[34rem] w-[34rem] rounded-full bg-sky/25 blur-3xl"></div>
+      <img src="/images/logo-mark.webp" alt="" class="absolute -bottom-10 -left-16 w-[32rem] opacity-[.07]" />
+    </div>
+    <div class="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-6">
+        <Reveal client:load><a href="/#locations" class="link-arrow text-sm"><span aria-hidden="true">←</span> All Locations</a></Reveal>
+        <Reveal client:load delay={0.06}><p class="eyebrow mt-8">Physical therapy in {clinic.name}</p></Reveal>
+        <Reveal client:load delay={0.12}><h1 class="h-display mt-5">{clinic.name} <em>Clinic</em></h1></Reveal>
+        <Reveal client:load delay={0.2}><p class="lead mt-6 max-w-xl">{clinic.tagline}</p></Reveal>
+        <Reveal client:load delay={0.26}>
+          <ul role="list" class="mt-8 grid gap-3 text-[0.98rem] text-ink">
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>{clinic.address}{clinic.note && <span class="text-muted"> · {clinic.note}</span>}</span></li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>{clinic.hours[0]}</span></li>
+          </ul>
+        </Reveal>
+        <Reveal client:load delay={0.32}>
+          <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a href={BOOK_URL} class="btn btn-ink">Request Appointment</a>
+            <a href={phoneHref} class="link-arrow">Call {phone}</a>
+          </div>
+        </Reveal>
+      </div>
+
+      <div class="lg:col-span-6">
+        <Reveal client:load delay={0.1}>
+          <div class="relative mx-auto max-w-xl lg:mr-0">
+            <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] border border-sky" aria-hidden="true"></div>
+            <div class="relative overflow-hidden rounded-[2rem] bg-sand shadow-[0_40px_80px_-40px_rgb(10_27_51/0.55)]">
+              <img src={gallery[0] ?? clinic.image} alt={`Inside the ${clinic.name} clinic`} width="1600" height="1067" fetchpriority="high" decoding="async" class="aspect-[4/3] w-full object-cover" />
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- About + trusted excellence -->
+  <section class="section bg-paper" aria-labelledby="about-title">
+    <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-20">
+      <div class="lg:col-span-7">
+        <Reveal client:visible><p class="eyebrow">About our clinic</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="about-title" class="h-section mt-5">Care built around <em>your goals.</em></h2></Reveal>
+        <Reveal client:visible delay={0.14}>
+          <div class="mt-7 max-w-2xl space-y-5 text-[1.05rem] leading-8 text-text">
+            {about.map((p) => <p>{p}</p>)}
+          </div>
+        </Reveal>
+      </div>
+      {extra?.trusted && (
+        <Reveal client:visible delay={0.1} className="lg:col-span-5">
+          <aside class="relative h-full overflow-hidden rounded-3xl bg-sky p-8 text-ink lg:p-10" aria-label="Trusted excellence">
+            <img src="/images/logo-mark.webp" alt="" class="pointer-events-none absolute -bottom-8 -right-8 w-56 opacity-[.14] mix-blend-multiply" />
+            <p class="eyebrow text-ink/80">Trusted excellence</p>
+            <p class="relative mt-5 font-serif text-[1.45rem] leading-snug">{extra.trusted}</p>
+          </aside>
+        </Reveal>
+      )}
+    </div>
+  </section>
+
+  <!-- Conditions -->
+  <section class="section bg-mist/50" aria-labelledby="cond-title">
+    <div class="wrap">
+      <Reveal client:visible><p class="eyebrow">What we treat</p></Reveal>
+      <Reveal client:visible delay={0.08}><h2 id="cond-title" class="h-section mt-5">Conditions &amp; services at <em>{clinic.name}.</em></h2></Reveal>
+      <ul role="list" class="mt-10 flex flex-wrap gap-3">
+        {conditions.map((c) => (
+          <li>
+            {c.href ? (
+              <a href={c.href} class="inline-flex min-h-11 items-center rounded-lg border border-ink/10 bg-paper px-4 text-[0.95rem] text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-sky hover:bg-sky/25">{c.title}</a>
+            ) : (
+              <span class="inline-flex min-h-11 items-center rounded-lg border border-ink/10 bg-paper px-4 text-[0.95rem] text-ink">{c.title}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  {gallery.length > 0 && (
+    <section class="section bg-paper" aria-labelledby="gal-title">
+      <div class="wrap">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <Reveal client:visible><p class="eyebrow">Take a look inside</p></Reveal>
+            <Reveal client:visible delay={0.08}><h2 id="gal-title" class="h-section mt-5">Clinic <em>gallery.</em></h2></Reveal>
+          </div>
+          <p class="text-sm text-muted">{gallery.length} photos · tap any photo to enlarge</p>
+        </div>
+        <div class="mt-10">
+          <ClinicGallery client:visible images={gallery} name={clinic.name} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Specialists -->
+  {specialists.length > 0 && (
+    <section class="section bg-mist/50" aria-labelledby="spec-title">
+      <div class="wrap">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <Reveal client:visible><p class="eyebrow">Our specialists</p></Reveal>
+            <Reveal client:visible delay={0.08}><h2 id="spec-title" class="h-section mt-5">Meet the team at <em>{clinic.name}.</em></h2></Reveal>
+          </div>
+          <a href="/staff/" class="link-arrow">See everyone <span aria-hidden="true">→</span></a>
+        </div>
+        <ul role="list" class="team-grid cols-3 mt-12">
+          {specialists.map((t) => (
+            <li>
+              <a href={`/${t.slug}/`} class="group block">
+                <div class="overflow-hidden rounded-[1.25rem] border border-ink/15 bg-white p-1.5 transition-colors duration-300 group-hover:border-sky">
+                  <div class="overflow-hidden rounded-xl bg-mist">
+                    {t.image ? <img src={t.image} alt={`Portrait of ${t.name}`} loading="lazy" decoding="async" width="600" height="750" class="aspect-[4/5] w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]" /> : <div class="grid aspect-[4/5] place-items-center bg-gradient-to-br from-mist to-sky/40 font-serif text-5xl text-brand" aria-hidden="true">{initials(t.name)}</div>}
+                  </div>
+                </div>
+                <h3 class="mt-4 font-serif text-xl text-ink">{t.name}</h3>
+                <p class="creds mt-2.5 !gap-1.5">{t.creds.split(', ').map((c) => <span class="cred cred-sm">{c}</span>)}</p>
+                <p class="mt-1 text-sm text-muted">{t.role}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ -->
+  {faqs.length > 0 && (
+    <section class="section bg-paper" aria-labelledby="faq-title">
+      <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-20">
+        <div class="lg:col-span-4">
+          <Reveal client:visible><p class="eyebrow">Good to know</p></Reveal>
+          <Reveal client:visible delay={0.08}><h2 id="faq-title" class="h-section mt-5">Frequently asked <em>questions.</em></h2></Reveal>
+        </div>
+        <div class="grid content-start gap-3 lg:col-span-8">
+          {faqs.map((f, i) => (
+            <details class="group rounded-2xl border border-ink/10 bg-paper px-6 transition-colors open:border-sky open:bg-mist/40" open={i === 0}>
+              <summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 font-serif text-xl text-ink [&::-webkit-details-marker]:hidden">
+                {f.q}
+                <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-brand transition-transform duration-300 group-open:rotate-45" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                </span>
+              </summary>
+              <p class="pb-6 pr-10 text-[1.02rem] leading-8 text-text">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Visit -->
+  <section class="section bg-mist/50" aria-labelledby="visit-title">
+    <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-14">
+      <div class="lg:col-span-5">
+        <Reveal client:visible><p class="eyebrow">Plan your visit</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="visit-title" class="h-section mt-5">Visit the <em>{clinic.name}</em> clinic.</h2></Reveal>
+        <Reveal client:visible delay={0.14}>
+          <dl class="mt-9 grid gap-7">
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-[0.18em] text-brand">Location</dt>
+              <dd class="mt-2 text-[1.05rem] leading-7 text-ink">{clinic.address}{clinic.note && <span class="block text-muted">{clinic.note}</span>}<a href={directions} target="_blank" rel="noopener" class="link-arrow mt-1 text-sm">Get directions <span aria-hidden="true">→</span></a></dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-[0.18em] text-brand">Contact</dt>
+              <dd class="mt-2 text-[1.05rem] leading-7 text-ink"><a href={phoneHref} class="font-serif text-2xl hover:text-brand">{phone}</a><span class="block text-muted">Fax: {FAX}</span></dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-[0.18em] text-brand">Hours</dt>
+              <dd class="mt-2 grid gap-1 text-[1.05rem] text-ink">{clinic.hours.map((h) => <span>{h}</span>)}</dd>
+            </div>
+          </dl>
+          <a href={BOOK_URL} class="btn btn-ink mt-9">Book Appointment</a>
+        </Reveal>
+      </div>
+      <Reveal client:visible delay={0.1} className="lg:col-span-7">
+        <div class="h-full min-h-[22rem] overflow-hidden rounded-3xl border border-ink/10 bg-sand shadow-[0_30px_60px_-40px_rgb(10_27_51/0.5)]">
+          <iframe title={`Map of the ${clinic.name} clinic`} src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="h-full min-h-[22rem] w-full border-0 lg:min-h-[30rem]"></iframe>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <CtaBand eyebrow={`Your ${clinic.name} team`} secondary={{ label: 'Meet the full team', href: '/staff/' }}>Move better at our <em>{clinic.name}</em> clinic.</CtaBand>
+</BaseLayout>
