@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Reveal from '../islands/Reveal';
+import CtaBand from './CtaBand.astro';
+import { BOOK_URL, CLINICS, PHONE, PHONE_HREF, SERVICES_ALL } from '../../data/content';
+import type { ServicePage } from '../../data/services';
+
+interface Props { page: ServicePage }
+const { page } = Astro.props;
+const related = SERVICES_ALL.filter((s) => s.href !== `/${page.slug}/`).slice(0, 3);
+const [heroImg, overviewImg, guideImg] = page.images;
+---
+
+<BaseLayout solidHeader title={`${page.title} San Diego | Water & Sports Physical Therapy`} description={page.metaDescription}>
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden bg-mist/60 pb-16 pt-32 lg:pb-24 lg:pt-44">
+    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      <div class="absolute -right-40 top-10 h-[34rem] w-[34rem] rounded-full bg-sky/25 blur-3xl"></div>
+      <img src="/images/logo-mark.webp" alt="" class="absolute -bottom-10 -left-16 w-[32rem] opacity-[.07]" />
+    </div>
+    <div class="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-6">
+        <Reveal client:load><a href="/#services" class="link-arrow text-sm"><span aria-hidden="true">←</span> All services</a></Reveal>
+        <Reveal client:load delay={0.06}><p class="eyebrow mt-8">{page.eyebrow}</p></Reveal>
+        <Reveal client:load delay={0.12}><h1 class="h-display mt-5">{page.title}</h1></Reveal>
+        <Reveal client:load delay={0.2}><p class="lead mt-6 max-w-xl">{page.lead}</p></Reveal>
+        <Reveal client:load delay={0.26}>
+          <ul role="list" class="creds mt-7">
+            {page.highlights.map((h) => <li class="cred !normal-case !tracking-[0.04em]">{h}</li>)}
+          </ul>
+        </Reveal>
+        <Reveal client:load delay={0.32}>
+          <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a href={BOOK_URL} class="btn btn-ink">Request Appointment</a>
+            <a href={PHONE_HREF} class="link-arrow">Call {PHONE}</a>
+          </div>
+        </Reveal>
+      </div>
+      <div class="lg:col-span-6">
+        <Reveal client:load delay={0.1}>
+          <div class="relative mx-auto max-w-xl lg:mr-0">
+            <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] border border-sky" aria-hidden="true"></div>
+            <div class="relative overflow-hidden rounded-[2rem] bg-sand shadow-[0_40px_80px_-40px_rgb(10_27_51/0.55)]">
+              <img src={heroImg.src} alt={heroImg.alt} width="2000" height="1333" fetchpriority="high" decoding="async" class="aspect-[4/3] w-full object-cover" />
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section bg-paper" aria-labelledby="overview-title">
+    <div class="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
+      <Reveal client:visible className="lg:col-span-5 lg:order-2">
+        <div class="relative">
+          <div class="overflow-hidden rounded-3xl border border-ink/10 bg-sand p-1.5">
+            <img src={overviewImg.src} alt={overviewImg.alt} width="2000" height="1333" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-[1.25rem] object-cover object-[62%_50%]" />
+          </div>
+        </div>
+      </Reveal>
+      <div class="grid gap-6 lg:col-span-7 lg:order-1">
+        <Reveal client:visible><p class="eyebrow">The program</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="overview-title" class="h-section">{page.overview.title}</h2></Reveal>
+        <Reveal client:visible delay={0.14}>
+          <div class="max-w-2xl space-y-5 text-[1.05rem] leading-8 text-text">
+            {page.overview.paras.map((p) => <p>{p}</p>)}
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we assess -->
+  <section class="section bg-mist/50" aria-labelledby="assess-title">
+    <div class="wrap">
+      <Reveal client:visible><p class="eyebrow">Inside the assessment</p></Reveal>
+      <Reveal client:visible delay={0.08}><h2 id="assess-title" class="h-section mt-5">{page.assessTitle}</h2></Reveal>
+      <ul role="list" class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {page.assess.map((a, i) => (
+          <li>
+            <Reveal client:visible delay={(i % 3) * 0.07} className="h-full">
+              <div class="group h-full rounded-2xl border border-ink/10 bg-paper p-7 transition-all duration-500 hover:-translate-y-1 hover:border-sky hover:shadow-[0_26px_50px_-34px_rgb(10_27_51/0.45)]">
+                <span class="font-serif text-3xl text-sky transition-colors group-hover:text-brand">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="mt-3 font-serif text-2xl text-ink">{a.label}</h3>
+                <p class="mt-2 text-[0.98rem] leading-7 text-muted">{a.text}</p>
+              </div>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Personalized guidance -->
+  <section class="section bg-paper" aria-labelledby="guide-title">
+    <div class="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
+      <Reveal client:visible className="lg:col-span-6">
+        <div class="relative">
+          <div class="absolute inset-0 -translate-x-4 translate-y-4 rounded-[2rem] border border-sky" aria-hidden="true"></div>
+          <div class="relative overflow-hidden rounded-[2rem] bg-sand">
+            <img src={guideImg.src} alt={guideImg.alt} width="2000" height="1333" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover" />
+          </div>
+        </div>
+      </Reveal>
+      <div class="grid gap-6 lg:col-span-6">
+        <Reveal client:visible><p class="eyebrow">Your plan</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="guide-title" class="h-section">{page.guidance.title}</h2></Reveal>
+        <Reveal client:visible delay={0.14}>
+          <div class="space-y-5 text-[1.05rem] leading-8 text-text">
+            {page.guidance.paras.map((p) => <p>{p}</p>)}
+          </div>
+        </Reveal>
+        <Reveal client:visible delay={0.2}>
+          <div class="rounded-2xl border border-ink/10 bg-mist/50 p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand">{page.guidance.includesTitle}</p>
+            <ul role="list" class="creds mt-4">
+              {page.guidance.includes.map((x) => <li class="cred !normal-case !tracking-[0.03em]">{x}</li>)}
+            </ul>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section bg-mist/50" aria-labelledby="faq-title">
+    <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-20">
+      <div class="lg:col-span-4">
+        <Reveal client:visible><p class="eyebrow">Good to know</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="faq-title" class="h-section mt-5">Frequently asked <em>questions.</em></h2></Reveal>
+      </div>
+      <div class="grid content-start gap-3 lg:col-span-8">
+        {page.faqs.map((f, i) => (
+          <details class="group rounded-2xl border border-ink/10 bg-paper px-6 transition-colors open:border-sky open:bg-white" open={i === 0}>
+            <summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 font-serif text-xl text-ink [&::-webkit-details-marker]:hidden">
+              {f.q}
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-brand transition-transform duration-300 group-open:rotate-45" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              </span>
+            </summary>
+            <div class="space-y-3 pb-6 pr-10 text-[1.02rem] leading-8 text-text">{f.a.map((p) => <p>{p}</p>)}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Where -->
+  <section class="section bg-paper" aria-labelledby="where-title">
+    <div class="wrap">
+      <Reveal client:visible><p class="eyebrow">Where to find us</p></Reveal>
+      <Reveal client:visible delay={0.08}><h2 id="where-title" class="h-section mt-5">{page.title} at <em>all {CLINICS.length} clinics.</em></h2></Reveal>
+      <ul role="list" class="mt-10 flex flex-wrap gap-3">
+        {CLINICS.map((c) => (
+          <li><a href={`/locations/${c.slug}/`} class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-ink/10 bg-paper px-4 text-[0.95rem] text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-sky hover:bg-sky/25"><svg viewBox="0 0 24 24" class="h-4 w-4 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>{c.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="section bg-mist/50" aria-labelledby="related-title">
+    <div class="wrap">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 id="related-title" class="h-section">More ways we <em>help you move.</em></h2>
+        <a href="/#services" class="link-arrow">All services <span aria-hidden="true">→</span></a>
+      </div>
+      <ul role="list" class="mt-10 grid gap-6 md:grid-cols-3">
+        {related.map((s) => (
+          <li>
+            <a href={s.href} class="group block h-full overflow-hidden rounded-2xl border border-ink/10 bg-paper transition-all duration-500 hover:-translate-y-1.5 hover:border-sky hover:shadow-[0_30px_60px_-34px_rgb(10_27_51/0.45)]">
+              <div class="overflow-hidden bg-sand"><img src={s.image} alt={s.title} width="600" height="400" loading="lazy" decoding="async" class="aspect-[3/2] w-full object-cover transition-transform duration-700 group-hover:scale-105" /></div>
+              <div class="p-6"><h3 class="font-serif text-2xl text-ink">{s.title}</h3><p class="mt-2 text-[0.95rem] leading-6 text-muted">{s.text}</p><span class="link-arrow mt-3 text-sm">Learn more <span aria-hidden="true">→</span></span></div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand eyebrow={`Start with ${page.title.toLowerCase()}`} secondary={{ label: 'Find a clinic', href: '/locations/' }}>Run stronger, <em>feel better.</em></CtaBand>
+</BaseLayout>
