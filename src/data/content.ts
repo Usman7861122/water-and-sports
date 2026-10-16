@@ -186,9 +186,9 @@ export const SOCIALS = [
 /* ───────── Our Staff (homepage shows six; the full directory lives on /staff/) ───────── */
 export const STAFF_FEATURED = [
   { name: 'Dr. Kahl Goldfarb', creds: 'PT, DPT, OCS, OMT, CSCS', role: 'CEO / Founder', image: media.staff.goldfarb, href: '/dr-kahl-goldfarb-pt-dpt-ocs-omt-cscs/' },
-  { name: 'Dr. Sidjonn “CJ” Regala', creds: 'PT, DPT', role: 'Director, Carmel Valley', image: media.staff.regala, href: '/staff/' },
-  { name: 'Dr. David Evans', creds: 'PT, DPT, OCS', role: 'Director, Coronado', image: media.staff.evans, href: '/staff/' },
-  { name: 'Dr. Garrick Li', creds: 'PT, DPT, CERT. VRS', role: 'Director, Scripps Ranch', image: media.staff.li, href: '/staff/' },
-  { name: 'Dr. Maddie Horner', creds: 'PT, DPT', role: 'Director, UTC', image: media.staff.horner, href: '/staff/' },
-  { name: 'Dr. Matt Friedman', creds: 'PT, DPT', role: 'Director, Mission Beach & Poway', image: media.staff.friedman, href: '/staff/' },
+  { name: 'Dr. Sidjonn “CJ” Regala', creds: 'PT, DPT', role: 'Director, Carmel Valley', image: media.staff.regala, href: '/dr-sidjonn-cj-regala-pt-dpt/' },
+  { name: 'Dr. David Evans', creds: 'PT, DPT, OCS', role: 'Director, Coronado', image: media.staff.evans, href: '/dr-david-evans-pt-dpt-ocs/' },
+  { name: 'Dr. Garrick Li', creds: 'PT, DPT, CERT. VRS', role: 'Director, Scripps Ranch', image: media.staff.li, href: '/dr-garrick-li-pt-dpt-cert-vrs/' },
+  { name: 'Dr. Maddie Horner', creds: 'PT, DPT', role: 'Director, UTC', image: media.staff.horner, href: '/dr-maddie-horner-pt-dpt/' },
+  { name: 'Dr. Matt Friedman', creds: 'PT, DPT', role: 'Director, Mission Beach & Poway', image: media.staff.friedman, href: '/dr-matt-friedman-pt-dpt/' },
 ];

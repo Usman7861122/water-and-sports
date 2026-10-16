@@ -98,6 +98,36 @@ export const media = {
 
   athlete: (file: string) => m('2026/07/' + file),
 
+  // Team headshots (Our Staff page + profiles), keyed by slug
+  team: {
+    'dr-sidjonn-cj-regala-pt-dpt': m('2026/07/drkftbbzepj5_5oj5cgmwx9.2CJ22REGALAPTDPT.webp'),
+    'dr-david-evans-pt-dpt-ocs': m('2026/07/drpkh7zqxwq6_547bd7tyqc.VIDEVANSPTDPTOCS.webp'),
+    'dr-garrick-li-pt-dpt-cert-vrs': m('2026/07/dr_garrick_li_pt_dpt_cert_27icd568wt.VRS_.webp'),
+    'dr-maddie-horner-pt-dpt': m('2026/07/drxflhs8f1tm_efkea4via0.ADDIEHORNERPTDPT.webp'),
+    'dr-matt-friedman-pt-dpt': m('2026/07/drljud335ajd_s4esyst7ur.ATTFRIEDMANPTDPT.webp'),
+    'dr-matthew-speciale-pt-dpt': m('2026/07/drlk0ppz9tm0_e5bhh3waen.HEWSPECIALEPTDPT.webp'),
+    'dr-salvatore-torry-fantano-pt-dpt': m('2026/07/drkzzdndnyf4_t34vn29rb7.RY22FANTANOPTDPT.webp'),
+    'dr-ling-sun-pt-dpt': m('2026/07/drjzsqhl4ocv_cvgfs9d9z2.LINGSUNPTDPT.webp'),
+    'dr-nastaran-pourdehmobed-dpt': m('2026/08/Nas_headshot.jpg'),
+    'dr-adil-alexander-dpt': m('2026/08/unnamed-scaled.jpg'),
+    'dr-nader-alhooie-pt-dpt': m('2026/07/nader_alhooie_npeyvwf7i4.webp'),
+    'dr-avery-grant-pt-dpt': m('2026/07/dr34ld7aespm_qm2f1qqsjn.AveryGrant.webp'),
+    'dr-jenna-freeman-pt-dpt': m('2026/07/new_head_1_1qa8hbu9j9.webp'),
+    'dr-matthew-schiffino-pt-dpt': m('2026/07/drqtdc90165n_kevg9cfspj.MatthewSchiffino.webp'),
+    'dr-cindy-gutierrez-pt-dpt': m('2026/07/cindy_guiterrez_4g3fiolwkx.webp'),
+    'dr-robert-avery-pt-dpt': m('2026/07/drzb1mfqel7b_84pubzywy8.ROBERTAVERYPTDPT.webp'),
+    'dr-jc-plantier-pt-dpt': m('2026/08/JC-Plantier-small.jpg'),
+    'alex-bedrossian-pta': m('2026/08/Alex_Headshot.jpg'),
+    'nicole-pino-pta': m('2026/07/nicole_pino_pta_l6vrrnbi1o.webp'),
+    'vanessa-jasso-pta': m('2026/07/vanessa_jasso_pta_mkk7zj6ivi.webp'),
+    'heaven-berg-pta-mfdc': m('2026/07/heaven_berg_pta_mfdc_qwyz64i9q5.webp'),
+    'dayna-hansen-pta': m('2026/07/dayna_hansen_pta_u24at6bf6p.webp'),
+    'micaela-fairchild-pta': m('2026/07/micaela_fairchild_pta_nfly2y0grl.webp'),
+    'andrew-pitters-pta': m('2026/07/andrew_pitters_pta_gelaw9zemb.webp'),
+    'ali-rios-pta-cfps': m('2026/07/ali_rios_pta_cfps_h8dllovlo8.webp'),
+    'samantha-grendziak-pta': m('2026/07/samantha_grendziak_pta_tx9mx5b1yb.webp'),
+  } as Record<string, string>,
+
   // Staff headshots (homepage Our Staff section)
   staff: {
     goldfarb: m('2026/06/drcy2vir8p2t_isgwu3dh5r.BPTDPTOCSOMTCSCS-e1781983239766.webp'),
