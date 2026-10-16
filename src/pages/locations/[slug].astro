@@ -134,7 +134,6 @@ const initials = (n: string) => n.replace(/^Dr\.\s*/, '').replace(/[“”"]/g, 
             <Reveal client:visible><p class="eyebrow">Take a look inside</p></Reveal>
             <Reveal client:visible delay={0.08}><h2 id="gal-title" class="h-section mt-5">Clinic <em>gallery.</em></h2></Reveal>
           </div>
-          <p class="text-sm text-muted">{gallery.length} photos · tap any photo to enlarge</p>
         </div>
         <div class="mt-10">
           <ClinicGallery client:visible images={gallery} name={clinic.name} />
