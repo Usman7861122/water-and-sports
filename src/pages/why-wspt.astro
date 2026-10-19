@@ -1,0 +1,202 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/islands/Reveal';
+import CtaBand from '../components/sections/CtaBand.astro';
+import { BOOK_URL, CLINICS, PHONE, PHONE_HREF, WHY_STEPS, TECH_TOOLS, TECH_BENEFITS } from '../data/content';
+
+const imgs = [
+  { src: '/images/why/why-wspt-1.webp', w: 2000, h: 1333, alt: 'Physical therapist guiding a patient’s shoulder through a gentle stretch' },
+  { src: '/images/why/why-wspt-2.webp', w: 2000, h: 1125, alt: 'Therapist and patient walking on a treadmill while a tablet tracks progress' },
+  { src: '/images/why/why-wspt-3.webp', w: 2000, h: 1055, alt: 'Therapist reviewing a personal plan on a tablet with two patients' },
+];
+const pillars = WHY_STEPS.slice(0, 4);
+const stats = [
+  { v: '91.4%', l: 'Patient satisfaction' },
+  { v: '6.2', l: 'Visits on average' },
+  { v: '83%', l: 'Reach their goals' },
+  { v: '4.8/5', l: 'Average rating' },
+];
+const apart = [
+  'One licensed therapist for your whole visit',
+  'A plan written for your body, not a template',
+  'Objective testing at the start and along the way',
+  'Hands-on mentorship for every clinician, every week',
+  'Online booking in about two minutes',
+  `${CLINICS.length} clinics across San Diego`,
+];
+const icons: Record<string, string> = {
+  '0': '<path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/>',
+  '1': '<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6l8-3z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+  '2': '<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>',
+  '3': '<path d="M12 3 4 7.5v9L12 21l8-4.5v-9L12 3z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/>',
+};
+---
+
+<BaseLayout solidHeader title="Why Choose Water & Sports Physical Therapy | San Diego" description="One licensed therapist for every visit, a plan built around you, advanced technology and clinicians who keep learning. See why San Diego chooses Water & Sports Physical Therapy.">
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden bg-mist/60 pb-16 pt-32 lg:pb-24 lg:pt-44">
+    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      <div class="absolute -right-40 top-10 h-[34rem] w-[34rem] rounded-full bg-sky/25 blur-3xl"></div>
+      <img src="/images/logo-mark.webp" alt="" class="absolute -bottom-10 -left-16 w-[32rem] opacity-[.07]" />
+    </div>
+    <div class="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-6">
+        <Reveal client:load><a href="/" class="link-arrow text-sm"><span aria-hidden="true">←</span> Home</a></Reveal>
+        <Reveal client:load delay={0.06}><p class="eyebrow mt-8">Why Water &amp; Sports</p></Reveal>
+        <Reveal client:load delay={0.12}><h1 class="h-display mt-5">Care from a <em>real therapist,</em> start to finish.</h1></Reveal>
+        <Reveal client:load delay={0.2}><p class="lead mt-6 max-w-xl">No aides. No techs. No handoffs. From your first visit to your last, a licensed physical therapist treats you, using a plan built for your body and your goals.</p></Reveal>
+        <Reveal client:load delay={0.26}>
+          <ul role="list" class="creds mt-7">
+            {['Licensed therapists only', 'Personal treatment plans', 'Objective testing', 'Official PT of the San Diego Padres'].map((h) => <li class="cred !normal-case !tracking-[0.04em]">{h}</li>)}
+          </ul>
+        </Reveal>
+        <Reveal client:load delay={0.32}>
+          <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a href={BOOK_URL} class="btn btn-ink">Request Appointment</a>
+            <a href={PHONE_HREF} class="link-arrow">Call {PHONE}</a>
+          </div>
+        </Reveal>
+      </div>
+      <div class="lg:col-span-6">
+        <Reveal client:load delay={0.1}>
+          <div class="relative mx-auto max-w-xl lg:mr-0">
+            <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] border border-sky" aria-hidden="true"></div>
+            <div class="relative overflow-hidden rounded-[2rem] bg-sand shadow-[0_40px_80px_-40px_rgb(10_27_51/0.55)]">
+              <img src={imgs[0].src} alt={imgs[0].alt} width={imgs[0].w} height={imgs[0].h} fetchpriority="high" decoding="async" class="aspect-[4/3] w-full object-cover" />
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pillars -->
+  <section class="section bg-paper" aria-labelledby="pillars-title">
+    <div class="wrap">
+      <Reveal client:visible><p class="eyebrow">What you get</p></Reveal>
+      <Reveal client:visible delay={0.08}><h2 id="pillars-title" class="h-section mt-5 max-w-2xl">Four promises we <em>keep every visit.</em></h2></Reveal>
+      <ul role="list" class="mt-12 grid gap-5 sm:grid-cols-2">
+        {pillars.map((p, i) => (
+          <li>
+            <Reveal client:visible delay={(i % 2) * 0.07} className="h-full">
+              <div class="group h-full rounded-2xl border border-ink/10 bg-paper p-7 transition-all duration-500 hover:-translate-y-1 hover:border-sky hover:shadow-[0_26px_50px_-34px_rgb(10_27_51/0.45)]">
+                <span class="grid h-12 w-12 place-items-center rounded-xl bg-sky/30 text-brand">
+                  <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icons[String(i)]}></svg>
+                </span>
+                <h3 class="mt-5 font-serif text-2xl text-ink">{p.title}</h3>
+                <p class="mt-2 text-[0.98rem] leading-7 text-muted">{p.text}</p>
+              </div>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- No aides band -->
+  <section class="section bg-ink text-white" aria-labelledby="noaides-title">
+    <div class="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
+      <div class="grid gap-6 lg:col-span-6">
+        <Reveal client:visible><p class="eyebrow !text-sky">Our difference</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="noaides-title" class="h-section !text-white">No aides. No techs. <em class="!text-sky">Just your therapist.</em></h2></Reveal>
+        <Reveal client:visible delay={0.14}>
+          <div class="space-y-5 text-[1.05rem] leading-8 text-white/80">
+            <p>Many clinics hand parts of your visit to assistants. We do not. Your licensed therapist checks you, treats you, coaches your exercises and adjusts your plan, all in the same hour.</p>
+            <p>That means faster answers, better coaching and care that changes as your body does.</p>
+          </div>
+        </Reveal>
+      </div>
+      <Reveal client:visible className="lg:col-span-6">
+        <div class="relative">
+          <div class="absolute inset-0 translate-x-4 translate-y-4 rounded-[2rem] border border-sky/60" aria-hidden="true"></div>
+          <div class="relative overflow-hidden rounded-[2rem] bg-sand">
+            <img src={imgs[2].src} alt={imgs[2].alt} width={imgs[2].w} height={imgs[2].h} loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Technology -->
+  <section class="section bg-mist/50" aria-labelledby="tech-title">
+    <div class="wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
+      <Reveal client:visible className="lg:col-span-6">
+        <div class="relative">
+          <div class="absolute inset-0 -translate-x-4 translate-y-4 rounded-[2rem] border border-sky" aria-hidden="true"></div>
+          <div class="relative overflow-hidden rounded-[2rem] bg-sand">
+            <img src={imgs[1].src} alt={imgs[1].alt} width={imgs[1].w} height={imgs[1].h} loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
+          </div>
+        </div>
+      </Reveal>
+      <div class="grid gap-6 lg:col-span-6">
+        <Reveal client:visible><p class="eyebrow">Technology</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="tech-title" class="h-section">Technology that <em>proves progress.</em></h2></Reveal>
+        <Reveal client:visible delay={0.14}>
+          <ul role="list" class="grid gap-4">
+            {TECH_TOOLS.map((t) => (
+              <li class="rounded-2xl border border-ink/10 bg-paper p-5"><h3 class="font-serif text-xl text-ink">{t.name}</h3><p class="mt-1 text-[0.98rem] leading-7 text-muted">{t.text}</p></li>
+            ))}
+          </ul>
+        </Reveal>
+        <Reveal client:visible delay={0.2}>
+          <ul role="list" class="creds">{TECH_BENEFITS.map((b) => <li class="cred !normal-case !tracking-[0.03em]">{b}</li>)}</ul>
+        </Reveal>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="section bg-paper" aria-labelledby="edu-title">
+    <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-20">
+      <div class="lg:col-span-5">
+        <Reveal client:visible><p class="eyebrow">Our clinicians</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="edu-title" class="h-section mt-5">Therapists who <em>keep learning.</em></h2></Reveal>
+      </div>
+      <Reveal client:visible className="lg:col-span-7">
+        <div class="space-y-5 text-[1.05rem] leading-8 text-text">
+          <p>{WHY_STEPS[4].text}</p>
+          <p>NOMPTI is the North American Orthopaedic Manual Physical Therapy Institute. Its advanced training helps our team find the true source of pain and treat it with skilled, hands-on care.</p>
+          <p><a href="https://nompti.com/" class="link-arrow" rel="noopener" target="_blank">Learn about NOMPTI <span aria-hidden="true">→</span></a></p>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Stats + apart -->
+  <section class="section bg-mist/50" aria-labelledby="apart-title">
+    <div class="wrap">
+      <Reveal client:visible><p class="eyebrow">What sets us apart</p></Reveal>
+      <Reveal client:visible delay={0.08}><h2 id="apart-title" class="h-section mt-5 max-w-2xl">Results you can <em>see and measure.</em></h2></Reveal>
+      <ul role="list" class="mt-12 grid grid-cols-2 gap-5 lg:grid-cols-4">
+        {stats.map((s) => (
+          <li class="rounded-2xl border border-ink/10 bg-paper p-6 text-center">
+            <p class="font-serif text-4xl text-brand sm:text-5xl">{s.v}</p>
+            <p class="mt-2 text-sm text-muted">{s.l}</p>
+          </li>
+        ))}
+      </ul>
+      <ul role="list" class="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {apart.map((a) => (
+          <li class="flex items-start gap-3 rounded-xl border border-ink/10 bg-paper px-5 py-4 text-[0.98rem] text-ink">
+            <svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>{a}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Easy scheduling -->
+  <section class="section bg-paper" aria-labelledby="sched-title">
+    <div class="wrap">
+      <Reveal client:visible><p class="eyebrow">Easy scheduling</p></Reveal>
+      <Reveal client:visible delay={0.08}><h2 id="sched-title" class="h-section mt-5 max-w-2xl">Book in about two minutes, at a clinic <em>near you.</em></h2></Reveal>
+      <ul role="list" class="mt-10 flex flex-wrap gap-3">
+        {CLINICS.map((c) => (
+          <li><a href={`/locations/${c.slug}/`} class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-ink/10 bg-paper px-4 text-[0.95rem] text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-sky hover:bg-sky/25"><svg viewBox="0 0 24 24" class="h-4 w-4 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>{c.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand eyebrow="Start today" secondary={{ label: 'Find a clinic', href: '/locations/' }}>Feel the <em>difference.</em></CtaBand>
+</BaseLayout>
