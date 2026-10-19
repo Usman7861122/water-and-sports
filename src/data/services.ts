@@ -1,4 +1,6 @@
 import { SPORTS_PAGES } from './servicesSports';
+import { JOINTS_PAGES } from './servicesJoints';
+import { SURGERY_PAGES } from './servicesSurgery';
 // Content for individual service pages (copied from the dev site). Photos are licensed Shutterstock images saved in /public/images/services.
 export type ServicePage = {
   slug: string;
@@ -11,6 +13,7 @@ export type ServicePage = {
   assessTitle: string;
   assess: { label: string; text: string }[];
   guidance: { title: string; paras: string[]; includesTitle: string; includes: string[] };
+  extra?: { title: string; paras: string[] };
   images: { src: string; alt: string }[]; // [0] hero, [1] overview, [2] guidance
   faqs: { q: string; a: string[] }[];
 };
@@ -63,4 +66,4 @@ export const SERVICE_PAGES: Record<string, ServicePage> = {
   },
 };
 
-Object.assign(SERVICE_PAGES, SPORTS_PAGES);
+Object.assign(SERVICE_PAGES, SPORTS_PAGES, JOINTS_PAGES, SURGERY_PAGES);

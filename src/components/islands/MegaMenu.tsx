@@ -7,8 +7,8 @@ type Props = { active: string; onNavigate: () => void };
 
 const SERVICE_GROUPS: { title: string; href?: string; slugs: string[] }[] = [
   { title: 'Sports & performance', href: '/sports-performance/', slugs: ['running-analysis', 'performance-training', 'return-to-sport-testing', 'golf-rehabilitation', 'pickleball-injury-rehabilitation', 'shockwave-therapy'] },
-  { title: 'Joints & pain', slugs: ['shoulder-physical-therapy', 'elbow-pain', 'wrist-hand-pain', 'hip-pain-physical-therapy', 'ankle-pain-physical-therapy', 'foot-pain', 'acl-rehabilitation'] },
-  { title: 'Surgery, nerves & balance', slugs: ['post-surgical-rehabilitation', 'neuropathy-physical-therapy', 'balance-training', 'gait-training', 'vestibular-therapy', 'vertigo-physical-therapy'] },
+  { title: 'Joints & pain', href: '/joints-pain/', slugs: ['shoulder-physical-therapy', 'elbow-pain', 'wrist-hand-pain', 'hip-pain-physical-therapy', 'ankle-pain-physical-therapy', 'foot-pain', 'acl-rehabilitation'] },
+  { title: 'Surgery, nerves & balance', href: '/surgery-nerves-balance/', slugs: ['post-surgical-rehabilitation', 'neuropathy-physical-therapy', 'balance-training', 'gait-training', 'vestibular-therapy', 'vertigo-physical-therapy'] },
 ];
 
 const RESOURCES = [
