@@ -5,8 +5,8 @@ import { EASE } from '../../lib/animations';
 
 type Props = { active: string; onNavigate: () => void };
 
-const SERVICE_GROUPS: { title: string; slugs: string[] }[] = [
-  { title: 'Sports & performance', slugs: ['running-analysis', 'performance-training', 'return-to-sport-testing', 'golf-rehabilitation', 'pickleball-injury-rehabilitation', 'shockwave-therapy'] },
+const SERVICE_GROUPS: { title: string; href?: string; slugs: string[] }[] = [
+  { title: 'Sports & performance', href: '/sports-performance/', slugs: ['running-analysis', 'performance-training', 'return-to-sport-testing', 'golf-rehabilitation', 'pickleball-injury-rehabilitation', 'shockwave-therapy'] },
   { title: 'Joints & pain', slugs: ['shoulder-physical-therapy', 'elbow-pain', 'wrist-hand-pain', 'hip-pain-physical-therapy', 'ankle-pain-physical-therapy', 'foot-pain', 'acl-rehabilitation'] },
   { title: 'Surgery, nerves & balance', slugs: ['post-surgical-rehabilitation', 'neuropathy-physical-therapy', 'balance-training', 'gait-training', 'vestibular-therapy', 'vertigo-physical-therapy'] },
 ];
@@ -38,7 +38,7 @@ function Services({ onNavigate }: { onNavigate: () => void }) {
       <div className="col-span-9 grid grid-cols-3 gap-x-4">
         {SERVICE_GROUPS.map((g) => (
           <div key={g.title}>
-            <p className="mb-3 px-3 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand">{g.title}</p>
+            <p className="mb-3 px-3 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-brand">{g.href ? <a href={g.href} onClick={onNavigate} className="underline-offset-4 hover:underline focus-visible:underline">{g.title} →</a> : g.title}</p>
             <ul>
               {g.slugs.map((s) => {
                 const it = bySlug(s);
