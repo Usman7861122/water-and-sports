@@ -1,3 +1,4 @@
+import { SPORTS_PAGES } from './servicesSports';
 // Content for individual service pages (copied from the dev site). Photos are licensed Shutterstock images saved in /public/images/services.
 export type ServicePage = {
   slug: string;
@@ -61,3 +62,5 @@ export const SERVICE_PAGES: Record<string, ServicePage> = {
     ],
   },
 };
+
+Object.assign(SERVICE_PAGES, SPORTS_PAGES);

@@ -1,0 +1,12 @@
+---
+import ServicePageView from '../../components/sections/ServicePageView.astro';
+import { SERVICE_PAGES } from '../../data/services';
+import { CLINICS } from '../../data/content';
+
+export function getStaticPaths() {
+  return CLINICS.map((clinic) => ({ params: { clinic: clinic.slug }, props: { clinic } }));
+}
+const { clinic } = Astro.props;
+---
+
+<ServicePageView page={SERVICE_PAGES['performance-training']} clinic={clinic} />

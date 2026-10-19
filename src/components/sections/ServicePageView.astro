@@ -132,7 +132,7 @@ const [heroImg, overviewImg, guideImg] = page.images;
   <!-- What we assess -->
   <section class="section bg-mist/50" aria-labelledby="assess-title">
     <div class="wrap">
-      <Reveal client:visible><p class="eyebrow">Inside the assessment</p></Reveal>
+      <Reveal client:visible><p class="eyebrow">What to expect</p></Reveal>
       <Reveal client:visible delay={0.08}><h2 id="assess-title" class="h-section mt-5">{page.assessTitle}</h2></Reveal>
       <ul role="list" class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {page.assess.map((a, i) => (
@@ -237,5 +237,5 @@ const [heroImg, overviewImg, guideImg] = page.images;
     </div>
   </section>
 
-  <CtaBand eyebrow={clinic ? `${page.title} in ${clinic.name}` : `Start with ${svc}`} secondary={{ label: 'Find a clinic', href: '/locations/' }}>{clinic ? <>Book your visit in <em>{clinic.name}.</em></> : <>Run stronger, <em>feel better.</em></>}</CtaBand>
+  <CtaBand eyebrow={clinic ? `${page.title} in ${clinic.name}` : `Start with ${svc}`} secondary={{ label: 'Find a clinic', href: '/locations/' }}>{clinic ? <>Book your visit in <em>{clinic.name}.</em></> : <>Ready to start <em>{svc}?</em></>}</CtaBand>
 </BaseLayout>
