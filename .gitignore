@@ -1,7 +1,4 @@
-node_modules/
-dist/
-.astro/
-.env
-.env.*
-!.env.example
-.DS_Store
+
+# Dropbox originals (huge) - keep out of git and the build
+public/images/Clinic Profiles/
+.tmp/
