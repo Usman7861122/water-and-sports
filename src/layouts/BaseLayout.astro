@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Footer from '../components/sections/Footer.astro';
+import CookieConsent from '../components/islands/CookieConsent';
 import Header from '../components/islands/Header';
 import { SITE } from '../data/content';
 
@@ -31,5 +32,6 @@ const { title = SITE.title, description = SITE.description, solidHeader = false 
       <slot />
     </main>
     <Footer />
+    <CookieConsent client:idle />
   </body>
 </html>

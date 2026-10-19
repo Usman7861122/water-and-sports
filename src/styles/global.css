@@ -135,3 +135,11 @@
 }
 .cred:hover { background: var(--color-brand); border-color: var(--color-brand); color: #fff; transform: translateY(-2px); }
 .cred-sm { min-height: 1.5rem; padding: 0 .55rem; font-size: .66rem; letter-spacing: .1em; }
+
+/* Legal / long-form text */
+.legal section + section { margin-top: 2.75rem; }
+.legal h2 { font-family: var(--font-serif, 'Lora', serif); font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); line-height: 1.2; color: var(--color-ink); }
+.legal p { margin-top: 1rem; font-size: 1.04rem; line-height: 1.85; color: var(--color-text); max-width: 70ch; }
+.legal ul { margin-top: 1rem; display: grid; gap: .6rem; max-width: 70ch; }
+.legal li { position: relative; padding-left: 1.4rem; font-size: 1.04rem; line-height: 1.75; color: var(--color-text); }
+.legal li::before { content: ''; position: absolute; left: .2rem; top: .72em; width: .45rem; height: .45rem; border-radius: 9999px; background: var(--color-sky); }

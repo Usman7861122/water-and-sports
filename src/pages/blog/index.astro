@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Reveal from '../../components/islands/Reveal';
+import PageHero from '../../components/sections/PageHero.astro';
+import CtaBand from '../../components/sections/CtaBand.astro';
+import { BOOK_URL, POSTS } from '../../data/content';
+const posts = POSTS.filter((p) => !p.sample);
+---
+<BaseLayout solidHeader title="Health & Recovery Insights | Water & Sports Physical Therapy Blog" description="Expert advice, injury prevention tips and news from our San Diego physical therapy specialists.">
+  <PageHero eyebrow="Blog">
+    <Fragment slot="title">Health &amp; <em>recovery insights.</em></Fragment>
+    <Fragment slot="lead">Expert advice, injury prevention tips, and the latest news from our team of physical therapy specialists.</Fragment>
+    <Fragment slot="actions"><a href={BOOK_URL} class="btn btn-ink">Schedule a Consultation</a></Fragment>
+  </PageHero>
+
+  <section class="section bg-paper" aria-labelledby="posts-title">
+    <div class="wrap">
+      <Reveal client:visible><h2 id="posts-title" class="h-section max-w-2xl">Latest <em>articles.</em></h2></Reveal>
+      <ul role="list" class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((p, i) => (
+          <li>
+            <Reveal client:visible delay={i * 0.07} className="h-full">
+              <article class="group relative h-full overflow-hidden rounded-2xl border border-ink/10 bg-paper transition-all duration-500 hover:-translate-y-1.5 hover:border-sky hover:shadow-[0_30px_60px_-34px_rgb(10_27_51/0.45)]">
+                <div class="overflow-hidden bg-sand"><img src={p.image} alt="" width="1200" height="800" loading="lazy" decoding="async" class="aspect-[3/2] w-full object-cover transition-transform duration-700 group-hover:scale-105" /></div>
+                <div class="p-6">
+                  <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand">{p.tag} · {p.date}</p>
+                  <h3 class="mt-2 font-serif text-2xl leading-snug text-ink"><a href={p.href} class="after:absolute after:inset-0">{p.title}</a></h3>
+                  <p class="mt-3 text-[0.95rem] leading-7 text-muted">{p.excerpt}</p>
+                  <span class="link-arrow mt-4 text-sm" aria-hidden="true">Read article →</span>
+                </div>
+              </article>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-12 text-[1rem] text-muted">More articles from our therapists are coming soon.</p>
+    </div>
+  </section>
+
+  <CtaBand eyebrow="Blog" text="Have a question about an injury or a treatment? Our therapists are happy to help." secondary={{ label: 'Meet the team', href: '/staff/' }}>Questions about <em>your recovery?</em></CtaBand>
+</BaseLayout>

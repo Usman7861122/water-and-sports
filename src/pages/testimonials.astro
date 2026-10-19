@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/islands/Reveal';
+import PageHero from '../components/sections/PageHero.astro';
+import CtaBand from '../components/sections/CtaBand.astro';
+import { BOOK_URL } from '../data/content';
+import { ALSO, FEATURED, MORE } from '../data/athletes';
+const initials = (n: string) => n.replace(/[^A-Za-zÀ-ÿ. ]/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join('');
+const stats = [{ n: '100s', l: 'of high school, college and pro athletes treated' }, { n: 'Padres', l: 'Official Physical Therapist of the San Diego Padres' }, { n: 'SFMA', l: 'Selective Functional Movement Assessment with sport-specific tests' }];
+---
+<BaseLayout solidHeader title="Athlete Testimonials | Water & Sports Physical Therapy San Diego" description="See the professional athletes trusted by Water & Sports Physical Therapy, the Official Physical Therapist of the San Diego Padres.">
+  <PageHero eyebrow="Testimonials">
+    <Fragment slot="title">See what the <em>pros are saying.</em></Fragment>
+    <Fragment slot="lead">Water &amp; Sports Physical Therapy is the premier rehabilitation and injury prevention provider for professional and amateur athletes in San Diego.</Fragment>
+    <Fragment slot="actions"><a href={BOOK_URL} class="btn btn-ink">Request Appointment</a><a href="/running-analysis/" class="link-arrow">Explore sports care</a></Fragment>
+  </PageHero>
+
+  <section class="section bg-paper" aria-labelledby="pro-title">
+    <div class="wrap grid gap-10 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-6">
+        <Reveal client:visible><p class="eyebrow">Trusted by athletes</p></Reveal>
+        <Reveal client:visible delay={0.08}><h2 id="pro-title" class="h-section mt-5">Care built for <em>high-level performance.</em></h2></Reveal>
+      </div>
+      <div class="grid gap-5 text-[1.04rem] leading-8 text-text lg:col-span-6">
+        <Reveal client:visible><p>As the Official Physical Therapist of the San Diego Padres, your physical therapist is well equipped to deal with the highly demanding and specialized treatment professional athletics require. We have helped hundreds of high-level high school, collegiate, and professional athletes across a multitude of sports rehabilitate following injury, prevent future injury, and reach their maximum athletic potential.</p></Reveal>
+        <Reveal client:visible delay={0.06}><p>The Selective Functional Movement Assessment with sport-specific tests provides a baseline of strengths, weaknesses, and possible injury risks throughout the entire body. Treatment then focuses on ensuring maximal health throughout the musculoskeletal and neurological systems, so the athlete is in the best possible position to avoid injury and maximize performance.</p></Reveal>
+      </div>
+    </div>
+    <div class="wrap mt-12">
+      <ul role="list" class="grid gap-5 md:grid-cols-3">
+        {stats.map((s, i) => (
+          <li><Reveal client:visible delay={i * 0.07} className="h-full"><div class="h-full rounded-2xl bg-mist/70 p-7"><p class="font-serif text-4xl text-brand">{s.n}</p><p class="mt-2 text-[0.97rem] leading-7 text-muted">{s.l}</p></div></Reveal></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-mist/50" aria-labelledby="feat-title">
+    <div class="wrap">
+      <Reveal client:visible><p class="eyebrow">Athletes we’ve treated</p></Reveal>
+      <Reveal client:visible delay={0.08}><h2 id="feat-title" class="h-section mt-5 max-w-2xl">Champions, All-Stars and <em>Olympians.</em></h2></Reveal>
+      <ul role="list" class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {FEATURED.map((a, i) => (
+          <li>
+            <Reveal client:visible delay={(i % 3) * 0.06} className="h-full">
+              <div class="flex h-full gap-4 rounded-2xl border border-ink/10 bg-paper p-6 transition-all duration-500 hover:-translate-y-1 hover:border-sky">
+                <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-sky/30 font-serif text-xl text-brand" aria-hidden="true">{initials(a.name)}</span>
+                <div><h3 class="font-serif text-2xl text-ink">{a.name}</h3><p class="mt-1.5 text-[0.93rem] leading-6 text-muted">{a.honors}</p></div>
+              </div>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-paper" aria-labelledby="more-title">
+    <div class="wrap">
+      <Reveal client:visible><p class="eyebrow">And many more</p></Reveal>
+      <Reveal client:visible delay={0.08}><h2 id="more-title" class="h-section mt-5 max-w-2xl">From the ballpark to the <em>Olympic stage.</em></h2></Reveal>
+      <ul role="list" class="mt-10 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+        {MORE.map((a) => (
+          <li class="border-t border-ink/10 pt-3"><p class="font-serif text-xl text-ink">{a.name}</p>{a.honors && <p class="mt-1 text-sm leading-6 text-muted">{a.honors}</p>}</li>
+        ))}
+      </ul>
+      <p class="mt-10 text-xs font-semibold uppercase tracking-[0.16em] text-brand">Also trusted by</p>
+      <p class="mt-3 max-w-4xl text-[0.98rem] leading-8 text-text">{ALSO.join(' · ')}</p>
+      <p class="mt-8 max-w-3xl text-sm leading-6 text-muted">Athletes are listed as former or current patients and their names do not imply endorsement. Results vary from person to person.</p>
+    </div>
+  </section>
+
+  <CtaBand eyebrow="Testimonials" text="Whether you play in the big leagues or on weekends, you get the same expert care." secondary={{ label: 'Meet our team', href: '/staff/' }}>Get care the <em>pros trust.</em></CtaBand>
+</BaseLayout>

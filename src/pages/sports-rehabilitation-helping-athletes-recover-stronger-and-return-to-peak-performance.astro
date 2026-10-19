@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/islands/Reveal';
+import CtaBand from '../components/sections/CtaBand.astro';
+import { media } from '../data/media';
+import { SPORTS_REHAB_POST as post } from '../data/posts';
+const toc = post.sections.map((s) => ({ h: s.h, id: s.h.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') }));
+const faqLd = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: post.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.join(' ') } })) });
+---
+<BaseLayout solidHeader title={`${post.title} | WSPT Blog`} description="Sports rehabilitation restores movement, reduces pain and rebuilds strength so athletes can return to play safely. Learn what to expect and when to start.">
+  <section class="relative isolate overflow-hidden bg-mist/60 pb-12 pt-32 lg:pb-16 lg:pt-44">
+    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true"><div class="absolute -right-40 top-10 h-[30rem] w-[30rem] rounded-full bg-sky/25 blur-3xl"></div></div>
+    <div class="wrap max-w-4xl">
+      <Reveal client:load><a href="/blog/" class="link-arrow text-sm"><span aria-hidden="true">←</span> All articles</a></Reveal>
+      <Reveal client:load delay={0.06}><p class="eyebrow mt-8">{post.tag} · {post.date}</p></Reveal>
+      <Reveal client:load delay={0.12}><h1 class="h-display mt-5 !text-[clamp(2.2rem,1.6rem+2.6vw,3.8rem)]">{post.title}</h1></Reveal>
+    </div>
+  </section>
+
+  <section class="bg-paper pb-4 pt-10">
+    <div class="wrap max-w-4xl"><div class="overflow-hidden rounded-[1.5rem] bg-sand"><img src={media.blog.sports} alt="A therapist checks the shoulder of an athlete during a physical therapy session" width="1600" height="900" fetchpriority="high" decoding="async" class="aspect-[16/8] w-full object-cover" /></div></div>
+  </section>
+
+  <section class="section bg-paper !pt-12">
+    <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <aside class="lg:col-span-3" aria-label="In this article">
+        <div class="lg:sticky lg:top-28">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-brand">In this article</p>
+          <ol role="list" class="mt-4 grid gap-1 border-l border-ink/10">
+            {toc.map((s) => <li><a href={`#${s.id}`} class="-ml-px flex min-h-10 items-center border-l-2 border-transparent py-1 pl-4 text-[0.92rem] leading-5 text-muted transition-colors hover:border-brand hover:text-brand">{s.h}</a></li>)}
+            <li><a href="#faq" class="-ml-px flex min-h-10 items-center border-l-2 border-transparent py-1 pl-4 text-[0.92rem] leading-5 text-muted transition-colors hover:border-brand hover:text-brand">Frequently Asked Questions</a></li>
+          </ol>
+        </div>
+      </aside>
+      <article class="legal lg:col-span-9">
+        {post.intro.map((p) => <p class="!text-[1.12rem]">{p}</p>)}
+        {post.sections.map((s, i) => (
+          <section id={toc[i].id} class="scroll-mt-28 !mt-12">
+            <h2>{s.h}</h2>
+            {s.paras?.map((p) => <p>{p}</p>)}
+            {s.list && <ul>{s.list.map((li) => <li>{li}</li>)}</ul>}
+            {s.after && <p>{s.after}</p>}
+            {s.subs?.map((sub) => (<div class="mt-8"><h3 class="font-serif text-xl text-ink md:text-2xl">{sub.h}</h3>{sub.paras.map((p) => <p>{p}</p>)}</div>))}
+          </section>
+        ))}
+        <section id="faq" class="scroll-mt-28 !mt-14">
+          <h2>Frequently Asked Questions</h2>
+          <div class="mt-6 grid gap-3">
+            {post.faqs.map((f, i) => (
+              <details class="group rounded-2xl border border-ink/10 bg-paper px-6 transition-colors open:border-sky open:bg-white" open={i === 0}>
+                <summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 font-serif text-xl text-ink [&::-webkit-details-marker]:hidden">
+                  {f.q}
+                  <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-brand transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+                </summary>
+                <div class="pb-6 pr-10">{f.a.map((p) => <p class="!mt-3">{p}</p>)}</div>
+              </details>
+            ))}
+          </div>
+        </section>
+        <p class="mt-12 border-t border-ink/10 pt-6 text-sm leading-6 text-muted">This article is for general information and is not medical advice. See our <a href="/medical-disclaimer/" class="text-brand underline underline-offset-4">Medical Disclaimer</a>.</p>
+      </article>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={faqLd}></script>
+  <CtaBand eyebrow="Sports rehabilitation" secondary={{ label: 'Sports & performance care', href: '/sports-performance/' }}>Recover stronger. <em>Return to play.</em></CtaBand>
+</BaseLayout>

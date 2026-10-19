@@ -1,4 +1,5 @@
 ---
+import { LEGAL_LINKS } from '../../data/legal';
 import { BOOK_URL, CLINICS, HOURS, PHONE, PHONE_HREF, FOOTER_SERVICES, HOURS_NOTE, SITE, SOCIALS } from '../../data/content';
 import { media } from '../../data/media';
 
@@ -67,9 +68,8 @@ const icons: Record<string, string> = {
     <div class="mt-16 flex flex-col items-start justify-between gap-4 border-t border-ink/10 pt-8 text-sm text-muted md:flex-row md:items-center">
       <p>&copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
       <div class="flex flex-wrap gap-x-6">
-        <a href="/privacy-policy/" class="flex min-h-10 items-center hover:text-brand">Privacy Policy</a>
-        <a href="/terms/" class="flex min-h-10 items-center hover:text-brand">Terms of Use</a>
-        <a href={BOOK_URL} class="flex min-h-10 items-center hover:text-brand">Request Appointment</a>
+        {LEGAL_LINKS.map((l) => <a href={l.href} class="flex min-h-10 items-center hover:text-brand">{l.label}</a>)}
+        <button type="button" data-cookie-settings class="flex min-h-10 items-center hover:text-brand">Cookie Settings</button>
       </div>
     </div>
   </div>
