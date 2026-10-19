@@ -4,6 +4,7 @@ import Reveal from '../components/islands/Reveal';
 import CtaBand from '../components/sections/CtaBand.astro';
 import { BOOK_URL, CLINICS, PHONE, PHONE_HREF, SERVICES_ALL } from '../data/content';
 import { SERVICE_PAGES } from '../data/services';
+import { REAL } from '../data/real';
 
 const SLUGS = ['running-analysis', 'performance-training', 'return-to-sport-testing', 'golf-rehabilitation', 'pickleball-injury-rehabilitation', 'shockwave-therapy'];
 const items = SLUGS.map((slug) => {
@@ -11,7 +12,7 @@ const items = SLUGS.map((slug) => {
   const base = SERVICES_ALL.find((s) => s.href === `/${slug}/`);
   return { slug, title: page.title, text: base?.text ?? page.lead, eyebrow: page.eyebrow, image: page.images[0] };
 });
-const mosaic = [SERVICE_PAGES['performance-training'].images[0], SERVICE_PAGES['golf-rehabilitation'].images[0], SERVICE_PAGES['pickleball-injury-rehabilitation'].images[0]];
+const mosaic = [{ src: REAL.team.src, alt: REAL.team.alt }, SERVICE_PAGES['golf-rehabilitation'].images[0], SERVICE_PAGES['pickleball-injury-rehabilitation'].images[0]];
 const steps = [
   { t: 'We assess how you move', d: 'Every plan starts with a hands-on evaluation and movement testing, not a guess.' },
   { t: 'You get a plan for your sport', d: 'Treatment and training are built around your injury, your sport and your goals.' },

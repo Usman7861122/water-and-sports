@@ -6,6 +6,7 @@ import PageHero from '../components/sections/PageHero.astro';
 import CtaBand from '../components/sections/CtaBand.astro';
 import { EMAIL } from '../data/content';
 import { JOBS, PERKS } from '../data/resources';
+import { REAL } from '../data/real';
 const events = ['Harbor cruises', 'Team-building events', 'Staff celebrations', 'Community activities', 'Collaborative environment'];
 ---
 <BaseLayout solidHeader title="Careers | Join the Team at Water & Sports Physical Therapy San Diego" description="Physical therapist and PTA jobs in San Diego. Join a collaborative team in sports and orthopedic rehab with continuing education and career growth.">
@@ -13,7 +14,7 @@ const events = ['Harbor cruises', 'Team-building events', 'Staff celebrations', 
     <Fragment slot="title">Join the team <em>at WSPT.</em></Fragment>
     <Fragment slot="lead">Join a collaborative team helping athletes, active adults, orthopedic patients, and families throughout San Diego move better, recover stronger, and live healthier.</Fragment>
     <Fragment slot="actions"><a href="#openings" class="btn btn-ink">See open positions</a><a href="#apply" class="link-arrow">Apply now</a></Fragment>
-    <Fragment slot="aside"><div class="overflow-hidden rounded-[1.5rem] bg-sand shadow-[0_40px_80px_-40px_rgb(10_27_51/0.55)]"><img src="/images/why/why-wspt-1.webp" alt="Therapists working together with a patient at Water & Sports Physical Therapy" width="1600" height="1067" fetchpriority="high" decoding="async" class="aspect-[4/3] w-full object-cover" /></div></Fragment>
+    <Fragment slot="aside"><div class="overflow-hidden rounded-[1.5rem] bg-sand shadow-[0_40px_80px_-40px_rgb(10_27_51/0.55)]"><img src={REAL.team.src} alt={REAL.team.alt} width={REAL.team.w} height={REAL.team.h} fetchpriority="high" decoding="async" class="aspect-[4/3] w-full object-cover" /></div></Fragment>
   </PageHero>
 
   <section class="section bg-paper" aria-labelledby="diff-title">

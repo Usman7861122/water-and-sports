@@ -99,8 +99,15 @@ const [heroImg, overviewImg, guideImg] = page.images;
           </Reveal>
         </div>
         <Reveal client:visible delay={0.1} className="lg:col-span-7">
-          <div class="h-full min-h-[22rem] overflow-hidden rounded-3xl border border-ink/10 bg-sand shadow-[0_30px_60px_-40px_rgb(10_27_51/0.5)]">
-            <iframe title={`Map of the ${clinic.name} clinic`} src={`https://maps.google.com/maps?q=${q}&output=embed`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="h-full min-h-[22rem] w-full border-0"></iframe>
+          <div class="grid h-full gap-4">
+            {clinic.gallery?.[0] && (
+              <figure class="overflow-hidden rounded-3xl border border-ink/10 bg-sand shadow-[0_30px_60px_-40px_rgb(10_27_51/0.5)]">
+                <img src={clinic.gallery[0]} alt={`Inside the ${clinic.name} clinic`} width="1600" height="900" loading="lazy" decoding="async" class="aspect-[16/8] w-full object-cover" />
+              </figure>
+            )}
+            <div class="min-h-[18rem] overflow-hidden rounded-3xl border border-ink/10 bg-sand shadow-[0_30px_60px_-40px_rgb(10_27_51/0.5)]">
+              <iframe title={`Map of the ${clinic.name} clinic`} src={`https://maps.google.com/maps?q=${q}&output=embed`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="h-full min-h-[18rem] w-full border-0"></iframe>
+            </div>
           </div>
         </Reveal>
       </div>

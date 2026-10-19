@@ -5,6 +5,7 @@ import PageHero from '../components/sections/PageHero.astro';
 import CtaBand from '../components/sections/CtaBand.astro';
 import { BOOK_URL } from '../data/content';
 import { ALSO, FEATURED, MORE } from '../data/athletes';
+import { REAL } from '../data/real';
 const initials = (n: string) => n.replace(/[^A-Za-zÀ-ÿ. ]/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join('');
 const stats = [{ n: '100s', l: 'of high school, college and pro athletes treated' }, { n: 'Padres', l: 'Official Physical Therapist of the San Diego Padres' }, { n: 'SFMA', l: 'Selective Functional Movement Assessment with sport-specific tests' }];
 ---
@@ -13,6 +14,7 @@ const stats = [{ n: '100s', l: 'of high school, college and pro athletes treated
     <Fragment slot="title">See what the <em>pros are saying.</em></Fragment>
     <Fragment slot="lead">Water &amp; Sports Physical Therapy is the premier rehabilitation and injury prevention provider for professional and amateur athletes in San Diego.</Fragment>
     <Fragment slot="actions"><a href={BOOK_URL} class="btn btn-ink">Request Appointment</a><a href="/running-analysis/" class="link-arrow">Explore sports care</a></Fragment>
+    <Fragment slot="aside"><div class="mx-auto max-w-sm overflow-hidden rounded-[1.5rem] bg-sand shadow-[0_40px_80px_-40px_rgb(10_27_51/0.55)] lg:mr-0"><img src={REAL.neck.src} alt={REAL.neck.alt} width={REAL.neck.w} height={REAL.neck.h} fetchpriority="high" decoding="async" class="aspect-[4/5] w-full object-cover object-top" /></div></Fragment>
   </PageHero>
 
   <section class="section bg-paper" aria-labelledby="pro-title">
