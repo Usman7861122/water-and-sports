@@ -13,7 +13,7 @@ export const media = {
 
   // Hero slides: licensed Shutterstock photos (standard license). Saved as hero-1..3.webp in public/images.
   hero: [
-    { src: '/images/hero-1.webp', alt: 'A physical therapist guiding an athlete through a shoulder exercise in a bright modern clinic', pos: 'center 35%' },
+    { src: '/images/hero-1-soccer.webp', alt: 'A soccer player dribbling the ball across a training field at sunset', pos: '72% 50%' },
     { src: '/images/hero-2.webp', alt: 'A swimmer training in a lap pool, seen from above', pos: 'center 20%' },
     { src: '/images/hero-3.webp', alt: 'An athlete stretching on a running track before training', pos: 'center 45%' },
   ],
